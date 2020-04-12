@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>其他 on Enoch&#39;s Blog</title>
-    <link>https://www.enochqin.xyz/tags/%E5%85%B6%E4%BB%96/</link>
+    <link>https://enochqin.xyz/tags/%E5%85%B6%E4%BB%96/</link>
     <description>Recent content in 其他 on Enoch&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 12 Apr 2020 19:41:28 +0800</lastBuildDate>
     
-	<atom:link href="https://www.enochqin.xyz/tags/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://enochqin.xyz/tags/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>使用Hugo搭建个人博客网站</title>
-      <link>https://www.enochqin.xyz/post/%E4%BD%BF%E7%94%A8Hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</link>
+      <link>https://enochqin.xyz/post/%E4%BD%BF%E7%94%A8Hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</link>
       <pubDate>Sun, 12 Apr 2020 19:41:28 +0800</pubDate>
       
-      <guid>https://www.enochqin.xyz/post/%E4%BD%BF%E7%94%A8Hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</guid>
+      <guid>https://enochqin.xyz/post/%E4%BD%BF%E7%94%A8Hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</guid>
       <description>前言 Hugo简介 Hugo快速开始 主题</description>
     </item>
     
