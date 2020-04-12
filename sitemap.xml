@@ -3,26 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>https://www.enochqin.xyz/</loc>
+    <lastmod>2020-04-12T19:20:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.enochqin.xyz/about/</loc>
+    <lastmod>2020-04-12T19:20:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.enochqin.xyz/post/first-blog/</loc>
     <lastmod>2020-04-12T13:02:28+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/posts/first-blog/</loc>
+    <loc>https://www.enochqin.xyz/post/</loc>
     <lastmod>2020-04-12T13:02:28+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/posts/</loc>
-    <lastmod>2020-04-12T13:02:28+08:00</lastmod>
+    <loc>https://www.enochqin.xyz/categories/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://www.enochqin.xyz/tags/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://www.enochqin.xyz/archives/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.enochqin.xyz/search/</loc>
   </url>
   
 </urlset>
