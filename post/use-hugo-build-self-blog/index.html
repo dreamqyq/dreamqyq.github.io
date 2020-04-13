@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>关于我 | Enoch&#39;s Blog</title>
-    <meta property="og:title" content="关于我 - Enoch&#39;s Blog">
+    <title>使用Hugo搭建个人博客网站 | Enoch&#39;s Blog</title>
+    <meta property="og:title" content="使用Hugo搭建个人博客网站 - Enoch&#39;s Blog">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-04-12T19:20:36&#43;08:00'>
+    <meta property="article:published_time" content='2020-04-12T19:41:28&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-04-12T19:20:36&#43;08:00'>
+    <meta property="article:modified_time" content='2020-04-12T19:41:28&#43;08:00'>
         
     <meta name="Keywords" content="JavaScript、Java">
-    <meta name="description" content="关于我">
+    <meta name="description" content="使用Hugo搭建个人博客网站">
         
     <meta name="author" content="Enoch Qin">
-    <meta property="og:url" content="https://enochqin.xyz/about/">
+    <meta property="og:url" content="https://enochqin.xyz/post/use-hugo-build-self-blog/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -60,11 +60,11 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://enochqin.xyz">首页</a>
+                    <a class="current" href="https://enochqin.xyz">首页</a>
                     
                     <a  href="https://enochqin.xyz/archives/" title="归档">归档</a>
                     
-                    <a class="current" href="https://enochqin.xyz/about/" title="关于">关于</a>
+                    <a  href="https://enochqin.xyz/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -143,7 +143,21 @@
 <div class="post-toc" style="position: absolute; top: 188px;">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-        <nav id="TableOfContents"></nav>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#hugo简介">Hugo简介</a></li>
+    <li><a href="#hugo快速开始">Hugo快速开始</a>
+      <ul>
+        <li><a href="#hugo安装">Hugo安装</a></li>
+        <li><a href="#快速搭建博客">快速搭建博客</a></li>
+        <li><a href="#hugo常用命令">Hugo常用命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#主题">主题</a></li>
+    <li><a href="#遇到的问题">遇到的问题</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 <script type="text/javascript">
@@ -176,11 +190,18 @@
 
     <article class="post">
         <header>
-            <h1 class="post-title">关于我</h1>
+            <h1 class="post-title">使用Hugo搭建个人博客网站</h1>
         </header>
         <date class="post-meta meta-date">
             2020年4月12日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://enochqin.xyz/categories/%E5%85%B6%E4%BB%96'>其他</a></span>
+            
+        </div>
         
         
         <div class="post-meta">
@@ -190,11 +211,90 @@
         
         
         <div class="post-content">
-            <p>前端开发工程师，先位于深圳</p>
+            <h2 id="前言">前言</h2>
+<p>两年前用Hexo搭建博客，但是因为各种配置问题没有继续跟进，之后就一直在<a href="https://www.jianshu.com/u/150c4ef48860">简书</a>写的博客。恰逢看到新的博客生成工具<a href="https://gohugo.io/">Hugo</a>，所以重新搭建了一个个人博客网站，通过Github Pages，域名重定向来实现线上访问。本文介绍的就是如何使用Hugo搭建个人博客网站的过程。</p>
+<h2 id="hugo简介">Hugo简介</h2>
+<p>不同与Hexo是用JavaScript实现的，Hugo是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。从我的个人体验来讲，Hugo比Hexo速度更快，而且不用依赖一大堆东西，一个二进制文件就可以搞定。</p>
+<blockquote>
+<p>The world’s fastest framework for building websites. Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.</p>
+</blockquote>
+<p>这是<a href="https://gohugo.io/">Hugo</a>的主页对自己的介绍，看这嚣张的简介，<strong>“全球最快的网站建设框架”</strong>，就不禁想让人来体验一把。</p>
+<p>那么就开始吧！</p>
+<h2 id="hugo快速开始">Hugo快速开始</h2>
+<p><a href="https://gohugo.io/">Hugo</a>的首页有一个显眼的按钮【Quick Start】，点击它，按步骤完成即可
+<img src="/images/Hugo.png" alt="Hugo首页"></p>
+<h3 id="hugo安装">Hugo安装</h3>
+<h4 id="mac">Mac</h4>
+<pre><code>brew install hugo
+hugo version
+</code></pre><h4 id="windows">Windows</h4>
+<p>去<a href="https://github.com/gohugoio/hugo/releases">Hugo releases页面</a>下载<code>hugo_xxx_Windows-64bit.zip</code> 将它解压到一个安全的目录，然后把这个目录添加到环境变量PATH中，重启终端，运行<code>hugo version</code>，正确展示了版本号就说明安装成功。</p>
+<h3 id="快速搭建博客">快速搭建博客</h3>
+<p>可以进入<a href="https://gohugo.io/">Hugo</a>首页，点击Quick Start快速开始，从Step 2开始抄代码，直到Step 7结束。（Step 1是安装Hugo，我们在上文已经介绍了。）</p>
+<p>也可以根据接下来的步骤依次执行：</p>
+<ol>
+<li>创建一个新的项目（quickstart 是项目名称，可以改成你想要的名字）
+<pre><code>hugo new site quickstart
+</code></pre></li>
+<li>添加一个主题（这里会安装一个默认主题ananke）
+<pre><code>cd quickstart
+git init
+git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
+
+echo 'theme = &quot;ananke&quot;' &gt;&gt; config.toml
+</code></pre></li>
+<li>创建一个新的博客
+<pre><code>hugo new posts/my-first-post.md
+</code></pre><p>注意：博客文件开头的 <code>draft: false</code>要改成true，否则改博客不会被生成到public目录中。</p>
+</li>
+<li>开启 Hugo Serve，用于本地预览
+<pre><code>hugo server -D
+</code></pre></li>
+<li>定制主题，如果对步骤2安装的默认主题不满意，可以自己选择一个主题进行替换
+<ul>
+<li>重复步骤2，把你想要替换的主题GitHub路径替换一下就好，然后在配置文件<code>config.toml</code>里修改下面的配置</li>
+</ul>
+<pre><code>baseURL = &quot;https://example.org/&quot;
+languageCode = &quot;en-us&quot;
+title = &quot;My New Hugo Site&quot;
+theme = &quot;ananke&quot;
+</code></pre><ul>
+<li>baseURL 改成你的博客主页地址</li>
+<li>languageCode 如果是中文博客，可以改成<code>zh-CN</code></li>
+<li>title 即博客名称</li>
+<li><strong>theme</strong> 这里是重点，把theme的值改成你替换的主题的名称，然后主题就生效啦。</li>
+</ul>
+</li>
+<li>构建静态页面
+<pre><code>hugo -D
+</code></pre><p>这个命令执行以后会生成一个<code>./public</code>的目录，将这个目录上传到GitHub，创建一个名为<code>dreamqyq.github.io</code>的项目（dreamqyq 这里替换成你的GitHub账号名），然后使用GitHub Pages就可以让别人来看你的博客啦。</p>
+</li>
+</ol>
+<h3 id="hugo常用命令">Hugo常用命令</h3>
+<ul>
+<li><code>hugo</code> 构建静态文件</li>
+<li><code>hugo server -D</code> 本地预览</li>
+<li><code>hugo new blogName.md</code> 生成一个新的博客</li>
+</ul>
+<h2 id="主题">主题</h2>
+<p>我的个人博客网站的主题使用了<a href="https://github.com/flysnow-org/maupassant-hugo">maupassant</a> 主题，在这个主题的Github主页README中有详细的配置方法，这里就不再赘述。如果喜欢的话可以参考教程进行配置。</p>
+<h2 id="遇到的问题">遇到的问题</h2>
+<p>在配置教程的时候遇到了一个问题，上文中提到的配置<code>bashURL</code>应该是个人博客网站的地址，由于我做了Gihubub Pages域名转发，使用了我自己的域名 <a href="https://enochqin.xyz">https://enochqin.xyz</a>。在最开始配置的时候，写成了<code>https://www.enochqin.xyz</code>，导致博客的很多功能各种出错，后来才意识到，我的域名没有做www的映射，导致其实<code>https://www.enochqin.xyz</code>这个网址是不能访问的。</p>
+<p>没有www和带www的域名是被看做两个不同的域名的。一般我们都会将两个域名设置指向相同的一个网站。但是实际上带www的和不带www的域名完全可以设置指向两个不同的服务器。这样你访问带www和不带www的地址，看到的是两个不同的网站了。</p>
+<p>（完）</p>
 
         </div>
 
         
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://enochqin.xyz">Enoch Qin</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://enochqin.xyz/post/use-hugo-build-self-blog/">https://enochqin.xyz/post/use-hugo-build-self-blog/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
 
 
         
@@ -202,6 +302,8 @@
 <div class="post-archive">
     <h2>See Also</h2>
     <ul class="listing">
+        
+        <li><a href="/about/">关于我</a></li>
         
         <li><a href="/post/first-blog/">First Blog</a></li>
         
@@ -215,7 +317,11 @@
 
         <div class="post-meta meta-tags">
             
-            没有标签
+            <ul class="clearfix">
+                
+                <li><a href='https://enochqin.xyz/tags/%E5%85%B6%E4%BB%96'>其他</a></li>
+                
+            </ul>
             
         </div>
     </article>

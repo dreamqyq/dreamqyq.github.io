@@ -13,11 +13,11 @@
     
     <item>
       <title>使用Hugo搭建个人博客网站</title>
-      <link>https://enochqin.xyz/post/%E4%BD%BF%E7%94%A8Hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</link>
+      <link>https://enochqin.xyz/post/use-hugo-build-self-blog/</link>
       <pubDate>Sun, 12 Apr 2020 19:41:28 +0800</pubDate>
       
-      <guid>https://enochqin.xyz/post/%E4%BD%BF%E7%94%A8Hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</guid>
-      <description>前言 Hugo简介 Hugo快速开始 主题</description>
+      <guid>https://enochqin.xyz/post/use-hugo-build-self-blog/</guid>
+      <description>前言 两年前用Hexo搭建博客，但是因为各种配置问题没有继续跟进，之后就一直在简书写的博客。恰逢看到新的博客生成工具Hugo，所以重新搭建了一个个人博客网站，通过Github Pages，域名重定向来实现线上访问。本文介绍的就是如何使用Hugo搭建个人博客网站的过程。 Hugo简介 不同</description>
     </item>
     
     <item>
