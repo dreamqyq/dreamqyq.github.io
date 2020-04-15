@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Enoch&#39;s Blog</title>
+    <link>https://enochqin.xyz/tags/git/</link>
+    <description>Recent content in git on Enoch&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 28 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://enochqin.xyz/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>git 入门</title>
+      <link>https://enochqin.xyz/post/Front-end-base/introduction-to-git/</link>
+      <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Front-end-base/introduction-to-git/</guid>
+      <description>前言：是一个分散式版本控制软件，最初由林纳斯·托瓦兹制作，于2005年以GPL协议出品。如网站github，本文简单的介绍一些的git 的常用操作。 1、 git init 命令作用：在当前目录新建一个Git代码库 使用时间：当需要创建新仓库时使用 代码实例：git init 2、 git add 命令作用：添加指定文件到暂存</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>命令行 on Enoch&#39;s Blog</title>
+    <link>https://enochqin.xyz/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</link>
+    <description>Recent content in 命令行 on Enoch&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 28 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://enochqin.xyz/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>命令行初识（介绍常用命令）</title>
+      <link>https://enochqin.xyz/post/Front-end-base/command-line-tcommonly-used-command/</link>
+      <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Front-end-base/command-line-tcommonly-used-command/</guid>
+      <description>1、ls命令 —— 显示当前目录下的路径 该命令对应的单词是list ，其不加参数时不显示隐藏文件。中包含以下常用的参数说明： ls -a 显示当前目录下的所有文件（包括以.开头的隐藏文件） ls -l显示当前目录下文件的详细信息 ls -al 显示当前目录下的所有文件的详细信息 注：详细信息中的字母含义（drwx）</description>
+    </item>
+    
+  </channel>
+</rss>

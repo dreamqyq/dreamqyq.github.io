@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>博客 on Enoch&#39;s Blog</title>
+    <link>https://enochqin.xyz/tags/%E5%8D%9A%E5%AE%A2/</link>
+    <description>Recent content in 博客 on Enoch&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 12 Apr 2020 19:41:28 +0800</lastBuildDate>
+    
+	<atom:link href="https://enochqin.xyz/tags/%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用Hugo搭建个人博客网站</title>
+      <link>https://enochqin.xyz/post/Linux/use-hugo-build-self-blog/</link>
+      <pubDate>Sun, 12 Apr 2020 19:41:28 +0800</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Linux/use-hugo-build-self-blog/</guid>
+      <description>前言 两年前用Hexo搭建博客，但是因为各种配置问题没有继续跟进，之后就一直在简书写的博客。恰逢看到新的博客生成工具Hugo，所以重新搭建了一个个人博客网站，通过Github Pages，域名重定向来实现线上访问。本文介绍的就是如何使用Hugo搭建个人博客网站的过程。 Hugo简介 不同</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -13,10 +13,10 @@
     
     <item>
       <title>使用Hugo搭建个人博客网站</title>
-      <link>https://enochqin.xyz/post/use-hugo-build-self-blog/</link>
+      <link>https://enochqin.xyz/post/Linux/use-hugo-build-self-blog/</link>
       <pubDate>Sun, 12 Apr 2020 19:41:28 +0800</pubDate>
       
-      <guid>https://enochqin.xyz/post/use-hugo-build-self-blog/</guid>
+      <guid>https://enochqin.xyz/post/Linux/use-hugo-build-self-blog/</guid>
       <description>前言 两年前用Hexo搭建博客，但是因为各种配置问题没有继续跟进，之后就一直在简书写的博客。恰逢看到新的博客生成工具Hugo，所以重新搭建了一个个人博客网站，通过Github Pages，域名重定向来实现线上访问。本文介绍的就是如何使用Hugo搭建个人博客网站的过程。 Hugo简介 不同</description>
     </item>
     
@@ -27,6 +27,141 @@
       
       <guid>https://enochqin.xyz/post/first-blog/</guid>
       <description>使用Hogu搭建博客 Hugo官网 快速开始 开博大吉！ 自己的博客网站开通了，后续我的博客将在本站和 简书 同步更新！</description>
+    </item>
+    
+    <item>
+      <title>常见的排序算法（JavaScript实现）</title>
+      <link>https://enochqin.xyz/post/Algorithm/common-sorting-algorithms-javascript/</link>
+      <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Algorithm/common-sorting-algorithms-javascript/</guid>
+      <description>冒泡排序 —— O(n^2) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 function bubleSort(arr) { for(let i = 0; i &amp;lt; arr.length-1 /*i代表轮数*/; i++) { for(let j = 0; j &amp;lt; arr.length - 1 - i /*j代表当前轮选中的元素下标*/; j++) { if(arr[j] &amp;gt; arr[j+1]) { [ arr[j], arr[j+1] ] = [ arr[j+1], arr[j] ] /*交换元素*/ } //console.log(arr) } } } var arr = [10, 34, 21, 47, 3, 28] bubleSort(arr) console.log(arr) 选择排序 —— O(n^2) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 function sectionSort(arr) { for(let min = i</description>
+    </item>
+    
+    <item>
+      <title>初级前端需要知道的基础知识</title>
+      <link>https://enochqin.xyz/post/Front-end-base/basic-knowledge-primary-front-end-needs-to-know/</link>
+      <pubDate>Wed, 18 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Front-end-base/basic-knowledge-primary-front-end-needs-to-know/</guid>
+      <description>前言：本文会罗列出十道比较基础的题目，我个人作为刚入门的初级前端，写这篇文章正好可以总结汇总一下近期的知识，看到这篇文章的朋友也可以看看这十道题你是否都能正确的、完整的答出来。我个人会总结出答案放于文后，欢迎讨论。 题目详情： 1、请写出一个符合 W3C 规范的 HTML 文件，要求如下： 页面标题为「</description>
+    </item>
+    
+    <item>
+      <title>再识移动端开发（动态REM）</title>
+      <link>https://enochqin.xyz/post/CSS/mobile-development-dynamic-rem/</link>
+      <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/CSS/mobile-development-dynamic-rem/</guid>
+      <description>前言：之前写过一篇博客介绍响应式移动端开发，而本文会介绍一种非响应式的移动端开发技术：动态REM。看了这两篇文章，你将会对移动端开发有全面的了解。 1、前置知识 首先来介绍一下在写CSS中常用的长度单位： px：即像素，最最常用 rem：即root em，表示根元素的font-size，根</description>
+    </item>
+    
+    <item>
+      <title>关于Deepin突然死机、重启后黑屏无法操作</title>
+      <link>https://enochqin.xyz/post/Linux/deepin-suddenly-after-crash-restart-black-screen-cant-operate/</link>
+      <pubDate>Fri, 13 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Linux/deepin-suddenly-after-crash-restart-black-screen-cant-operate/</guid>
+      <description>前言：使用deepin系统也有一段时间了，但因为其不稳定性，着实出现了一些bug ，不过绝大多数都能用重启来解决，直到今天，我的deepin差点崩掉。 出现的问题 这次出现的问题大致如题目所说，下面详细描述一下： 在我因为正常的一系列操作后，首先是出现了鼠标错位的情况，然后我日常Goog</description>
+    </item>
+    
+    <item>
+      <title>CSS中的flex布局详解</title>
+      <link>https://enochqin.xyz/post/CSS/rounding-out-flex-css-layout/</link>
+      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/CSS/rounding-out-flex-css-layout/</guid>
+      <description>前言：之前我写过的一篇博客介绍CSS常用的几种布局方式，PC端最常见的就是浮动布局和flex布局，而在移动端，由于不用顾忌IE这个业界大坑，flex布局应用的就更广泛了，多以本文就来详细的介绍一些flex布局。 1、先不说flex布局 首先我们回顾一下除了flex布局之外的常用布局方</description>
+    </item>
+    
+    <item>
+      <title>初识移动端（响应式）</title>
+      <link>https://enochqin.xyz/post/CSS/first-mobile-terminal-response/</link>
+      <pubDate>Thu, 07 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/CSS/first-mobile-terminal-response/</guid>
+      <description>前言：今天初次了解了移动端的一些常识，包括PC端和移动端的区别，媒体查询等的相关操作,以及国内的网站如何实现不同的端展示不同的样式。 1、媒体查询（附带MDN解释） 一个媒体查询由一个可选的媒体类型和零个或多个使用媒体功能的限制了样式表范围的表达式组成，例如宽度、高度和颜色。媒体查询</description>
+    </item>
+    
+    <item>
+      <title>CSS堆叠上下文</title>
+      <link>https://enochqin.xyz/post/CSS/css-stacked-context/</link>
+      <pubDate>Sat, 02 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/CSS/css-stacked-context/</guid>
+      <description>前言：设置了z-index:9999;的层叠顺序一定高于z-index:0;吗？很明显这句话在某些情况下是不成立的，而引起其不成立的原因就是堆叠上下文的现象。本文主要介绍关于css中堆叠上下文的概念、引起的原因等。 注：友情链接：关于堆叠上下文的MDN介绍，张鑫旭的博客《深入理解C</description>
+    </item>
+    
+    <item>
+      <title>元素的高度与宽度以及衍生技巧</title>
+      <link>https://enochqin.xyz/post/CSS/element-width-and-height-and-skills/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/CSS/element-width-and-height-and-skills/</guid>
+      <description>前言：本文主要写块级元素与内联元素的宽度与高度的相关知识，以及相关的衍生技巧，包括一些常用的居中方法等（与我的上一篇博客css如何居中不同，上一篇是把所有能用来居中的方法都介绍了一遍，本篇只写常用的方法，可以应对80%的情况） 1、块级元素宽高 块级元素的高度由其内部文档流的高度的总</description>
+    </item>
+    
+    <item>
+      <title>CSS如何居中</title>
+      <link>https://enochqin.xyz/post/CSS/css-how-center/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/CSS/css-how-center/</guid>
+      <description>本文翻译自CSS Tricks 中关于居中的相关介绍。 1、水平居中 内联元素的水平居中（如链接或文本） 可以在一个块级别的父元素中水平地居中内联元素，只需： 1 2 3 .center-children { text-align: center; } 注：这种写法适用于inline, inline-block, inline-table, inline-flex等等。 代码示例： =&amp;gt; html代码 1 2 3 4 5 6 7 8 9 10 &amp;lt;header&amp;gt; This text is centered. &amp;lt;/header&amp;gt; &amp;lt;nav role=&amp;#39;navigation&amp;#39;&amp;gt; &amp;lt;a</description>
+    </item>
+    
+    <item>
+      <title>CSS左右布局、左中右布局以及一些小技巧</title>
+      <link>https://enochqin.xyz/post/CSS/css-layout-some-tips/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/CSS/css-layout-some-tips/</guid>
+      <description>1、左右布局 如果有以下html结构，设置左右两栏布局 &amp;lt;div class=&amp;quot;parent&amp;quot;&amp;gt; &amp;lt;div class=&amp;quot;leftChild&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;quot;rightChild&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; 设置浮动：左右布局常用的方法就是为子元素设置浮动，然后在其父元素上使用clearfix类清除浮动。示例代码如下： .clearfix::after{ content:&amp;quot;&amp;quot;; display:block; clear:both; } .leftChild, .rightChild{ float:left; } 设置position绝对定位，为父元素设置position:relative; 为子元</description>
+    </item>
+    
+    <item>
+      <title>初识CSS</title>
+      <link>https://enochqin.xyz/post/CSS/i-met-css/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/CSS/i-met-css/</guid>
+      <description>CSS，中文称之为“层叠样式表”，英文全称为 Cascading Style Sheets 。一种用来为结构化文档（如HTML文档或XML应用）添加样式（字体、间距和颜色等）的计算机语言，由W3C定义和维护。目前最广泛运用的版本是CSS 2.1(链接为CSS2.1的官方文档)。 1. 学习资源： MDN =&amp;gt; Google 关键词 + MDN （用来查询css属</description>
+    </item>
+    
+    <item>
+      <title>Deepin与Windows8.1双系统启动项恢复</title>
+      <link>https://enochqin.xyz/post/Linux/Deepin-and-Windows8.1-dual-system-boot-item-recovery/</link>
+      <pubDate>Mon, 14 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Linux/Deepin-and-Windows8.1-dual-system-boot-item-recovery/</guid>
+      <description>前言： 这两天在折腾双系统，打算体验一下传说中的Linux的美妙之处，由于是第一次使用Linux，并且主旨不在折腾系统，只是想尝试Linux的环境以及更优雅的写代码，所以选择了相对不折腾的Deepin，但是还是遇到了各种奇葩的问题。比如这篇文章要写的启动项。 问题起因 安装完deepi</description>
+    </item>
+    
+    <item>
+      <title>Linux系统中VI下莫名出现的^M</title>
+      <link>https://enochqin.xyz/post/Linux/Linux-system-VI-M/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Linux/Linux-system-VI-M/</guid>
+      <description>本文写自我从windows转到Linux系统下，各种找bug的日常 首先就是我在windows下写的运行很正常的bash脚本和node脚本，在Linux的终端里用vim运行，各种报错。 比如运行这一句：#! /usr/bin/env node旨在让node文件可以直接默认用node运行，而不用node file</description>
+    </item>
+    
+    <item>
+      <title>git 入门</title>
+      <link>https://enochqin.xyz/post/Front-end-base/introduction-to-git/</link>
+      <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Front-end-base/introduction-to-git/</guid>
+      <description>前言：是一个分散式版本控制软件，最初由林纳斯·托瓦兹制作，于2005年以GPL协议出品。如网站github，本文简单的介绍一些的git 的常用操作。 1、 git init 命令作用：在当前目录新建一个Git代码库 使用时间：当需要创建新仓库时使用 代码实例：git init 2、 git add 命令作用：添加指定文件到暂存</description>
+    </item>
+    
+    <item>
+      <title>命令行初识（介绍常用命令）</title>
+      <link>https://enochqin.xyz/post/Front-end-base/command-line-tcommonly-used-command/</link>
+      <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Front-end-base/command-line-tcommonly-used-command/</guid>
+      <description>1、ls命令 —— 显示当前目录下的路径 该命令对应的单词是list ，其不加参数时不显示隐藏文件。中包含以下常用的参数说明： ls -a 显示当前目录下的所有文件（包括以.开头的隐藏文件） ls -l显示当前目录下文件的详细信息 ls -al 显示当前目录下的所有文件的详细信息 注：详细信息中的字母含义（drwx）</description>
     </item>
     
   </channel>

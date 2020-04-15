@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://enochqin.xyz/categories/Linux/</loc>
+    <lastmod>2020-04-12T19:41:28+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://enochqin.xyz/post/</loc>
     <lastmod>2020-04-12T19:41:28+08:00</lastmod>
   </url>
@@ -18,17 +23,12 @@
   </url>
   
   <url>
-    <loc>https://enochqin.xyz/post/use-hugo-build-self-blog/</loc>
+    <loc>https://enochqin.xyz/post/Linux/use-hugo-build-self-blog/</loc>
     <lastmod>2020-04-12T19:41:28+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://enochqin.xyz/tags/%E5%85%B6%E4%BB%96/</loc>
-    <lastmod>2020-04-12T19:41:28+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://enochqin.xyz/categories/%E5%85%B6%E4%BB%96/</loc>
+    <loc>https://enochqin.xyz/tags/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2020-04-12T19:41:28+08:00</lastmod>
   </url>
   
@@ -45,6 +45,121 @@
   <url>
     <loc>https://enochqin.xyz/post/first-blog/</loc>
     <lastmod>2020-04-12T13:02:28+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/tags/Algorithm/</loc>
+    <lastmod>2018-09-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/categories/Algorithm/</loc>
+    <lastmod>2018-09-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/Algorithm/common-sorting-algorithms-javascript/</loc>
+    <lastmod>2018-09-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/Front-end-base/basic-knowledge-primary-front-end-needs-to-know/</loc>
+    <lastmod>2018-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2018-07-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/tags/CSS/</loc>
+    <lastmod>2018-07-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/categories/CSS/</loc>
+    <lastmod>2018-07-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/CSS/mobile-development-dynamic-rem/</loc>
+    <lastmod>2018-07-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/tags/Linux/</loc>
+    <lastmod>2018-07-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/Linux/deepin-suddenly-after-crash-restart-black-screen-cant-operate/</loc>
+    <lastmod>2018-07-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/CSS/rounding-out-flex-css-layout/</loc>
+    <lastmod>2018-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/CSS/first-mobile-terminal-response/</loc>
+    <lastmod>2018-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/CSS/css-stacked-context/</loc>
+    <lastmod>2018-06-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/CSS/element-width-and-height-and-skills/</loc>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/CSS/css-how-center/</loc>
+    <lastmod>2018-05-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/CSS/css-layout-some-tips/</loc>
+    <lastmod>2018-05-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/CSS/i-met-css/</loc>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/Linux/Deepin-and-Windows8.1-dual-system-boot-item-recovery/</loc>
+    <lastmod>2018-05-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/Linux/Linux-system-VI-M/</loc>
+    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/tags/git/</loc>
+    <lastmod>2018-04-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/Front-end-base/introduction-to-git/</loc>
+    <lastmod>2018-04-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</loc>
+    <lastmod>2018-04-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/Front-end-base/command-line-tcommonly-used-command/</loc>
+    <lastmod>2018-04-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
