@@ -48,6 +48,41 @@
   </url>
   
   <url>
+    <loc>https://enochqin.xyz/tags/JavaScript/</loc>
+    <lastmod>2018-09-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/categories/JavaScript/</loc>
+    <lastmod>2018-09-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/debounce-and-throttle-in-javascript/</loc>
+    <lastmod>2018-09-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/tags/HTTP/</loc>
+    <lastmod>2018-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/categories/HTTP/</loc>
+    <lastmod>2018-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/HTTP/web-performance-optimization-steps/</loc>
+    <lastmod>2018-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/inheritance-in-javascript/</loc>
+    <lastmod>2018-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://enochqin.xyz/tags/Algorithm/</loc>
     <lastmod>2018-09-17T00:00:00+00:00</lastmod>
   </url>
@@ -60,6 +95,51 @@
   <url>
     <loc>https://enochqin.xyz/post/Algorithm/common-sorting-algorithms-javascript/</loc>
     <lastmod>2018-09-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/tags/Vue/</loc>
+    <lastmod>2018-08-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/Front-end-frame/from-mvc-to-mvvmvue/</loc>
+    <lastmod>2018-08-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/</loc>
+    <lastmod>2018-08-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/HTTP/browser-cache-control-steps-cookies-session-localstorage-cache-control-etc./</loc>
+    <lastmod>2018-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/HTTP/web-site-is-how-to-implement-login-registration-function/</loc>
+    <lastmod>2018-08-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/object-oriented-programming-in-javascript/</loc>
+    <lastmod>2018-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/mvc-design-pattern-in-javascript/</loc>
+    <lastmod>2018-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/HTTP/jquery-ajax-encapsulated-with-native-js/</loc>
+    <lastmod>2018-07-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/HTTP/JSONP-JSON-AJAX/</loc>
+    <lastmod>2018-07-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -88,7 +168,7 @@
   </url>
   
   <url>
-    <loc>https://enochqin.xyz/tags/Linux/</loc>
+    <loc>https://enochqin.xyz/tags/Deepin/</loc>
     <lastmod>2018-07-13T00:00:00+00:00</lastmod>
   </url>
   
@@ -98,8 +178,48 @@
   </url>
   
   <url>
+    <loc>https://enochqin.xyz/post/Front-end-frame/native-javascript-implementation-jquery/</loc>
+    <lastmod>2018-07-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/function-in-javascript/</loc>
+    <lastmod>2018-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/array-in-javascript/</loc>
+    <lastmod>2018-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/document-object-model-in-javascript/</loc>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/prototype-prototype-chain-in-js/</loc>
+    <lastmod>2018-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://enochqin.xyz/post/CSS/rounding-out-flex-css-layout/</loc>
     <lastmod>2018-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/data-type-conversion-in-js/</loc>
+    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/complex-data-types-in-jsobject/</loc>
+    <lastmod>2018-06-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/JavaScript/simple-data-types-in-js/</loc>
+    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -138,8 +258,18 @@
   </url>
   
   <url>
+    <loc>https://enochqin.xyz/tags/Linux/</loc>
+    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://enochqin.xyz/post/Linux/Linux-system-VI-M/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/HTTP/basic-knowledge-entry-http-request-response/</loc>
+    <lastmod>2018-05-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
