@@ -4,21 +4,41 @@
   
   <url>
     <loc>https://enochqin.xyz/categories/</loc>
-    <lastmod>2020-04-12T19:41:28+08:00</lastmod>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://enochqin.xyz/categories/Linux/</loc>
-    <lastmod>2020-04-12T19:41:28+08:00</lastmod>
+    <loc>https://enochqin.xyz/tags/Java/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/categories/Java/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/post/Java/java-package-manage-and-maven/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/tags/Maven/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://enochqin.xyz/post/</loc>
-    <lastmod>2020-04-12T19:41:28+08:00</lastmod>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://enochqin.xyz/tags/</loc>
+    <lastmod>2020-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://enochqin.xyz/categories/Linux/</loc>
     <lastmod>2020-04-12T19:41:28+08:00</lastmod>
   </url>
   

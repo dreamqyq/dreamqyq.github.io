@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Maven on Enoch&#39;s Blog</title>
+    <link>https://enochqin.xyz/tags/Maven/</link>
+    <description>Recent content in Maven on Enoch&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 27 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://enochqin.xyz/tags/Maven/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java的包管理与Maven</title>
+      <link>https://enochqin.xyz/post/Java/java-package-manage-and-maven/</link>
+      <pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Java/java-package-manage-and-maven/</guid>
+      <description>前言：在Java的世界中，【包】是最基本的结构，因此包管理就是Java项目中的一件特别重要的事情。本文介绍的就是Java世界中的包管理，以及最流行的包管理工具Maven。 Java的包管理 要介绍Java的包管理，我们就要先知道什么是包： 包管理中的【包】指的是什么？ 首先，我要知道JV</description>
+    </item>
+    
+  </channel>
+</rss>
