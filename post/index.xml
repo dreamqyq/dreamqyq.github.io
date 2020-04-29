@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Enoch&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 27 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://enochqin.xyz/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Collection体系的常用类及其背后的数据结构</title>
+      <link>https://enochqin.xyz/post/Java/collection-in-java-and-their-data-structure/</link>
+      <pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/post/Java/collection-in-java-and-their-data-structure/</guid>
+      <description>前言：Collection是最基本的集合接口，在JDK 1.2版本被引入到Java的世界中来。Collection的出现，使得Java拥有了前所未有的强大能力。本文就将介绍Collection体系下常用的类的实现以及它们背后的数据结构。 Collection体系简介 Java集合框架(</description>
+    </item>
     
     <item>
       <title>Java的包管理与Maven</title>
