@@ -6,15 +6,33 @@
     <description>Recent content in Tags on Enoch&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 29 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://enochqin.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>TypeScript</title>
+      <link>https://enochqin.xyz/tags/TypeScript/</link>
+      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/tags/TypeScript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vue</title>
+      <link>https://enochqin.xyz/tags/Vue/</link>
+      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://enochqin.xyz/tags/Vue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Java</title>
       <link>https://enochqin.xyz/tags/Java/</link>
-      <pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://enochqin.xyz/tags/Java/</guid>
       <description></description>
@@ -62,15 +80,6 @@
       <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>https://enochqin.xyz/tags/Algorithm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Vue</title>
-      <link>https://enochqin.xyz/tags/Vue/</link>
-      <pubDate>Tue, 28 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/Vue/</guid>
       <description></description>
     </item>
     
