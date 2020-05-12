@@ -1,0 +1,2053 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CSS如何居中 | Enoch&#39;s Blog</title>
+    <meta property="og:title" content="CSS如何居中 - Enoch&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-05-22T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-05-22T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="JavaScript、Java">
+    <meta name="description" content="CSS如何居中">
+        
+    <meta name="author" content="Enoch Qin">
+    <meta property="og:url" content="https://dreamqyq.github.io/post/CSS/css-how-center/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4031353640611810",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://dreamqyq.github.io/">
+                        Enoch&#39;s Blog
+                    </a>
+                
+                <p class="description">前端开发工程师</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://dreamqyq.github.io/">首页</a>
+                    
+                    <a  href="https://dreamqyq.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://dreamqyq.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        margin: 0;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1水平居中">1、水平居中</a>
+      <ul>
+        <li><a href="#内联元素的水平居中如链接或文本">内联元素的水平居中（如链接或文本）</a></li>
+        <li><a href="#块级元素水平居中">块级元素水平居中</a></li>
+        <li><a href="#两个及以上的多个块级元素水平居中">两个及以上的多个块级元素水平居中</a></li>
+      </ul>
+    </li>
+    <li><a href="#2垂直居中">2、垂直居中</a>
+      <ul>
+        <li><a href="#21-内联元素垂直居中">2.1 内联元素垂直居中</a></li>
+        <li><a href="#22-块级元素垂直居中">2.2 块级元素垂直居中</a></li>
+      </ul>
+    </li>
+    <li><a href="#3水平居中垂直居中">3、水平居中+垂直居中</a>
+      <ul>
+        <li><a href="#固定宽高的元素">固定宽高的元素</a></li>
+        <li><a href="#宽高未知的元素">宽高未知的元素</a></li>
+        <li><a href="#使用flexbox居中">使用flexbox居中</a></li>
+        <li><a href="#使用grid居中">使用grid居中</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">CSS如何居中</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年5月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://dreamqyq.github.io/categories/CSS'>CSS</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p>本文翻译自<a href="https://css-tricks.com/centering-css-complete-guide/">CSS Tricks</a> 中关于居中的相关介绍。</p>
+<h2 id="1水平居中">1、水平居中</h2>
+<ul>
+<li>
+<h3 id="内联元素的水平居中如链接或文本">内联元素的水平居中（如链接或文本）</h3>
+</li>
+</ul>
+<p>可以在一个块级别的父元素中水平地居中内联元素，只需：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">center-children</span> {
+  <span style="color:#000;font-weight:bold">text-align</span>: <span style="color:#000;font-weight:bold">center</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>注：这种写法适用于<strong>inline</strong>, <strong>inline-block</strong>, <strong>inline-table</strong>, <strong>inline-flex</strong>等等。
+代码示例：
+=&gt; html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">header</span>&gt;
+  This text is centered.
+&lt;/<span style="color:#000080">header</span>&gt;
+
+&lt;<span style="color:#000080">nav</span> <span style="color:#008080">role</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;navigation&#39;</span>&gt;
+  &lt;<span style="color:#000080">a</span> <span style="color:#008080">href</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;#0&#34;</span>&gt;One&lt;/<span style="color:#000080">a</span>&gt;
+  &lt;<span style="color:#000080">a</span> <span style="color:#008080">href</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;#0&#34;</span>&gt;Two&lt;/<span style="color:#000080">a</span>&gt;
+  &lt;<span style="color:#000080">a</span> <span style="color:#008080">href</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;#0&#34;</span>&gt;Three&lt;/<span style="color:#000080">a</span>&gt;
+  &lt;<span style="color:#000080">a</span> <span style="color:#008080">href</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;#0&#34;</span>&gt;Four&lt;/<span style="color:#000080">a</span>&gt;
+&lt;/<span style="color:#000080">nav</span>&gt;  
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt; css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+}
+
+<span style="color:#000080">header</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000080">nav</span> {
+  <span style="color:#000;font-weight:bold">text-align</span>: <span style="color:#000;font-weight:bold">center</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#099">0</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">10</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+<span style="color:#000080">nav</span> <span style="color:#000080">a</span> {
+  <span style="color:#000;font-weight:bold">text-decoration</span>: <span style="color:#000;font-weight:bold">none</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#333</span>;
+  <span style="color:#000;font-weight:bold">border-radius</span>: <span style="color:#099">5</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">3</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#099">8</span><span style="color:#458;font-weight:bold">px</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt; 效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-85ceb6287253ba35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内联元素水平居中"></p>
+<ul>
+<li>
+<h3 id="块级元素水平居中">块级元素水平居中</h3>
+</li>
+</ul>
+<p>可以通过给它设置<code>margin-left</code>和<code>margin-right</code>为<code>auto</code> （并且该元素需有<code>width</code>属性，否则它将占满整行，无法居中）来居中一个块级元素。通常用这样的速记法来做：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">center-me</span> {
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">auto</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>注：无论您所处的块级别元素的宽度是多少，还是父节点，这都是可行的。
+注意：你不能浮动一个元素到水平居中的位置 ，不过有一个<a href="https://css-tricks.com/float-center/">小技巧</a>（本文不再详述，可点击链接自行查看）.
+代码示例：
+=&gt; html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>&gt;
+ &lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;center&#34;</span>&gt;
+   I&#39;m a block level element and am centered.
+ &lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt; css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#099">0</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">10</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+.<span style="color:#458;font-weight:bold">center</span> {
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">auto</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt; 效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-aa76cecbcc1e3955.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="块级元素居中"></p>
+<ul>
+<li>
+<h3 id="两个及以上的多个块级元素水平居中">两个及以上的多个块级元素水平居中</h3>
+</li>
+</ul>
+<p>如果您有两个或多个块级别的元素，它们需要在一行中水平居中，那么最好将它们作为不同的<code>display</code>。比如设置其为<code>display:inline-block</code>。</p>
+<p><strong>代码示例1：</strong>
+注：下面的示例中，inline-block-center的<code>&lt;main&gt;</code>标签中，是把父元素设置<code>text-align:center</code>，子元素设置<code>display:inline-block</code>；
+flex-center的<code>&lt;main&gt;</code>标签中，使用了CSS3中新增的<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">弹性盒子</a>（附带MDN相关介绍）是把父元素设置<code>display: flex;justify-content: center;</code>
+=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;inline-block-center&#34;</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m an element that is block-like with my siblings and we&#39;re centered in a row.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m an element that is block-like with my siblings and we&#39;re centered in a row. I have more content in me than my siblings do.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m an element that is block-like with my siblings and we&#39;re centered in a row.
+  &lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#000080">main</span>&gt;
+
+&lt;<span style="color:#000080">main</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;flex-center&#34;</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m an element that is block-like with my siblings and we&#39;re centered in a row.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m an element that is block-like with my siblings and we&#39;re centered in a row. I have more content in me than my siblings do.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m an element that is block-like with my siblings and we&#39;re centered in a row.
+  &lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#099">0</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">10</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">15</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">max-width</span>: <span style="color:#099">125</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">5</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+.<span style="color:#458;font-weight:bold">inline-block-center</span> {
+  <span style="color:#000;font-weight:bold">text-align</span>: <span style="color:#000;font-weight:bold">center</span>;
+}
+.<span style="color:#458;font-weight:bold">inline-block-center</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">inline</span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">block</span>;
+  <span style="color:#000;font-weight:bold">text-align</span>: <span style="color:#000;font-weight:bold">left</span>;
+}
+
+.<span style="color:#458;font-weight:bold">flex-center</span> {
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">flex</span>;
+  <span style="color:#000;font-weight:bold">justify-content</span>: <span style="color:#000;font-weight:bold">center</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-8ddc99f567084e4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="多个块级元素水平居中"></p>
+<p><strong>代码示例2：</strong>
+注：下面的例子中，表现的是你有多个块级元素堆叠在一起，在这种情况下，自动边距（即<code>margin:0 auto</code>）仍然很好。即多个块级元素不需要在一行显示，居中的方法仍使用<code>margin:0 auto</code>。
+=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m an element that is block-like with my siblings and we&#39;re centered in a row.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m an element that is block-like with my siblings and we&#39;re centered in a row. I have more content in me than my siblings do.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m an element that is block-like with my siblings and we&#39;re centered in a row.
+  &lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#099">0</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">10</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">auto</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">15</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">5</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#000;font-weight:bold">auto</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span>:<span style="color:#3c5d5d;font-weight:bold">nth-child</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000080">1</span><span style="color:#000;font-weight:bold">)</span> {
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+}
+<span style="color:#000080">main</span> <span style="color:#000080">div</span>:<span style="color:#3c5d5d;font-weight:bold">nth-child</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000080">2</span><span style="color:#000;font-weight:bold">)</span> {
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">400</span><span style="color:#458;font-weight:bold">px</span>;
+}
+<span style="color:#000080">main</span> <span style="color:#000080">div</span>:<span style="color:#3c5d5d;font-weight:bold">nth-child</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000080">3</span><span style="color:#000;font-weight:bold">)</span> {
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">125</span><span style="color:#458;font-weight:bold">px</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-2f072026d46caf5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="2垂直居中">2、垂直居中</h2>
+<ul>
+<li>
+<h3 id="21-内联元素垂直居中">2.1 内联元素垂直居中</h3>
+</li>
+</ul>
+<p><strong>2.1.1</strong> 单行内联元素垂直居中
+<strong>代码示例1：</strong>
+单行内联元素使用<strong>上下相同的padding</strong>造成垂直居中的效果</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">link</span> {
+  <span style="color:#000;font-weight:bold">padding-top</span>: <span style="color:#099">30</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">padding-bottom</span>: <span style="color:#099">30</span><span style="color:#458;font-weight:bold">px</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-2aea7cc7174c86cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用padding垂直居中"></p>
+<p><strong>代码示例2：</strong>
+当某些情况下，不适合使用padding填充时，可以让其<strong>文本的行高=父元素的高度</strong>达到垂直居中的效果。
+=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>&gt;
+  &lt;<span style="color:#000080">div</span>&gt;
+    I&#39;m a centered line.
+  &lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#099">0</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">40</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">line-height</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">white-space</span>: <span style="color:#000;font-weight:bold">nowrap</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-2567b4885a707b07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用行高垂直居中"></p>
+<p><strong>2.1.2</strong> 多行内联元素垂直居中
+<strong>代码示例1：</strong>
+使用<strong>表格布局</strong>居中（基本过时的用法）
+注：下面的例子中，第一个效果图展示的是直接使用<code>&lt;table&gt;</code>标签（其<code>&lt;td&gt;</code>标签默认垂直居中），第二个效果图展示的是父元素<code>&lt;div&gt;</code>设置<code>display:table</code>，子元素<code>&lt;p&gt;</code>设置<code>display: table-cell;vertical-align: middle;</code>
+=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">table</span>&gt;
+  &lt;<span style="color:#000080">tr</span>&gt;
+    &lt;<span style="color:#000080">td</span>&gt;
+      I&#39;m vertically centered multiple lines of text in a real table cell.
+    &lt;/<span style="color:#000080">td</span>&gt;
+  &lt;/<span style="color:#000080">tr</span>&gt;
+&lt;/<span style="color:#000080">table</span>&gt;
+
+&lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;center-table&#34;</span>&gt;
+  &lt;<span style="color:#000080">p</span>&gt;I&#39;m vertically centered multiple lines of text in a CSS-created table layout.&lt;/<span style="color:#000080">p</span>&gt;
+&lt;/<span style="color:#000080">div</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+}
+
+<span style="color:#000080">table</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">240</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">border-collapse</span>: <span style="color:#000;font-weight:bold">separate</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">250</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+<span style="color:#000080">table</span> <span style="color:#000080">td</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">border</span>: <span style="color:#099">10</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#000;font-weight:bold">solid</span> <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#998;font-style:italic">/* default is vertical-align: middle; */</span>
+}
+
+.<span style="color:#458;font-weight:bold">center-table</span> {
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">table</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">250</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">240</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+}
+.<span style="color:#458;font-weight:bold">center-table</span> <span style="color:#000080">p</span> {
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">table</span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">cell</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">border</span>: <span style="color:#099">10</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#000;font-weight:bold">solid</span> <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">vertical-align</span>: <span style="color:#000;font-weight:bold">middle</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-aebb9a92b498a009.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="table布局"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/11827773-da3057f5a632e29c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="display:table布局"></p>
+<p><strong>代码示例2：</strong>
+使用<strong>flexbox</strong>来垂直居中。
+精简CSS代码如下：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">flex-center-vertically</span> {
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">flex</span>;
+  <span style="color:#000;font-weight:bold">justify-content</span>: <span style="color:#000;font-weight:bold">center</span>;
+  <span style="color:#000;font-weight:bold">flex-direction</span>: <span style="color:#000;font-weight:bold">column</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">400</span><span style="color:#458;font-weight:bold">px</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>具体示例：
+=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;flex-center&#34;</span>&gt;
+  &lt;<span style="color:#000080">p</span>&gt;I&#39;m vertically centered multiple lines of text in a flexbox container.&lt;/<span style="color:#000080">p</span>&gt;
+&lt;/<span style="color:#000080">div</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+}
+
+<span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">240</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+.<span style="color:#458;font-weight:bold">flex-center</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">border</span>: <span style="color:#099">10</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#000;font-weight:bold">solid</span> <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">flex</span>;
+  <span style="color:#000;font-weight:bold">flex-direction</span>: <span style="color:#000;font-weight:bold">column</span>;
+  <span style="color:#000;font-weight:bold">justify-content</span>: <span style="color:#000;font-weight:bold">center</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">vertical</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+.<span style="color:#458;font-weight:bold">flex-center</span> <span style="color:#000080">p</span> {
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-2cba4aaba5e09826.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="flexbox垂直居中"></p>
+<p><strong>代码示例3：</strong>
+使用<strong>伪元素</strong>来垂直居中。
+精简CSS代码如下：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">ghost-center</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+}
+.<span style="color:#458;font-weight:bold">ghost-center</span>::<span style="color:#3c5d5d;font-weight:bold">before</span> {
+  <span style="color:#000;font-weight:bold">content</span>: <span style="color:#d14">&#34; &#34;</span>;
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">inline</span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">block</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">1</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">vertical-align</span>: <span style="color:#000;font-weight:bold">middle</span>;
+}
+.<span style="color:#458;font-weight:bold">ghost-center</span> <span style="color:#000080">p</span> {
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">inline</span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">block</span>;
+  <span style="color:#000;font-weight:bold">vertical-align</span>: <span style="color:#000;font-weight:bold">middle</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;ghost-center&#34;</span>&gt;
+  &lt;<span style="color:#000080">p</span>&gt;I&#39;m vertically centered multiple lines of text in a container. Centered with a ghost pseudo element&lt;/<span style="color:#000080">p</span>&gt;
+&lt;/<span style="color:#000080">div</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+}
+
+<span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">240</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">vertical</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+.<span style="color:#458;font-weight:bold">ghost-center</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+}
+.<span style="color:#458;font-weight:bold">ghost-center</span>::<span style="color:#3c5d5d;font-weight:bold">before</span> {
+  <span style="color:#000;font-weight:bold">content</span>: <span style="color:#d14">&#34; &#34;</span>;
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">inline</span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">block</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">1</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">vertical-align</span>: <span style="color:#000;font-weight:bold">middle</span>;
+}
+.<span style="color:#458;font-weight:bold">ghost-center</span> <span style="color:#000080">p</span> {
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">inline</span><span style="color:#000;font-weight:bold">-</span><span style="color:#000;font-weight:bold">block</span>;
+  <span style="color:#000;font-weight:bold">vertical-align</span>: <span style="color:#000;font-weight:bold">middle</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">190</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-58074c81920c1451.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="伪元素垂直居中"></p>
+<ul>
+<li>
+<h3 id="22-块级元素垂直居中">2.2 块级元素垂直居中</h3>
+</li>
+</ul>
+<p>不知道网页布局的高度是很常见的，原因有很多：如果宽度改变，文本流会改变高度。文本样式的差异可以改变高度。文本数量的差异可以改变高度。具有固定宽宽比的元素，如图像，可以在重置宽高时改变高度等等。
+但是如果你已经知道高度，就可以这样：</p>
+<p><strong>2.2.1</strong> 块级元素的高度已知/确定
+即设置子元素相对于父元素绝对定位，子元素设置<code>top：50%</code>，并设置<code>margin-top</code>为负的子元素自身高度的一半。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">parent</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+}
+.<span style="color:#458;font-weight:bold">child</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">absolute</span>;
+  <span style="color:#000;font-weight:bold">top</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin-top</span>: <span style="color:#099">-50</span><span style="color:#458;font-weight:bold">px</span>; <span style="color:#998;font-style:italic">/* account for padding and border if not using box-sizing: border-box; */</span>
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>代码示例：
+注：
+=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>&gt;
+  
+  &lt;<span style="color:#000080">div</span>&gt;
+     I&#39;m a block-level element with a fixed height, centered vertically within my parent.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">300</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">300</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">vertical</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">absolute</span>;
+  <span style="color:#000;font-weight:bold">top</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">left</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">right</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin-top</span>: <span style="color:#099">-70</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-785975d12195f497.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><strong>2.2.2</strong> 块级元素的高度未知/不确定
+它仍然可以通过将它的一半高度推到一半的高度来居中，即设置子元素<code> transform: translateY(-50%);</code> ，即：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">parent</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+}
+.<span style="color:#458;font-weight:bold">child</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">absolute</span>;
+  <span style="color:#000;font-weight:bold">top</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">transform</span>: <span style="color:#0086b3">translateY</span>(<span style="color:#099">-50</span><span style="color:#458;font-weight:bold">%</span>);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>&gt;
+  
+  &lt;<span style="color:#000080">div</span>&gt;
+     I&#39;m a block-level element with an unknown height, centered vertically within my parent.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">300</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">300</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">vertical</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">absolute</span>;
+  <span style="color:#000;font-weight:bold">top</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">left</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">right</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">transform</span>: <span style="color:#0086b3">translateY</span>(<span style="color:#099">-50</span><span style="color:#458;font-weight:bold">%</span>);
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">vertical</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-0d4f724eac319606.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><strong>2.2.3</strong> 使用<code>display:flex</code>布局
+即：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">parent</span> {
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">flex</span>;
+  <span style="color:#000;font-weight:bold">flex-direction</span>: <span style="color:#000;font-weight:bold">column</span>;
+  <span style="color:#000;font-weight:bold">justify-content</span>: <span style="color:#000;font-weight:bold">center</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>&gt;
+  
+  &lt;<span style="color:#000080">div</span>&gt;
+     I&#39;m a block-level element with an unknown height, centered vertically within my parent.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">300</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">flex</span>;
+  <span style="color:#000;font-weight:bold">flex-direction</span>: <span style="color:#000;font-weight:bold">column</span>;
+  <span style="color:#000;font-weight:bold">justify-content</span>: <span style="color:#000;font-weight:bold">center</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">vertical</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">vertical</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-f076f04a5a5fb4da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="3水平居中垂直居中">3、水平居中+垂直居中</h2>
+<ul>
+<li>
+<h3 id="固定宽高的元素">固定宽高的元素</h3>
+</li>
+</ul>
+<p>使用负的<code>margin</code>等于宽度和高度的一半，在你完全定位50%/50%之后，它会以巨大的跨浏览器支持为中心，即：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">parent</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+}
+
+.<span style="color:#458;font-weight:bold">child</span> {
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">300</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">absolute</span>;
+  <span style="color:#000;font-weight:bold">top</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">left</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">-70</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#099">0</span> <span style="color:#099">0</span> <span style="color:#099">-170</span><span style="color:#458;font-weight:bold">px</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>代码示例：
+=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>&gt;
+  
+  &lt;<span style="color:#000080">div</span>&gt;
+     I&#39;m a block-level element a fixed height and width, centered vertically within my parent.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">60</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">auto</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">both</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">-70</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#099">0</span> <span style="color:#099">0</span> <span style="color:#099">-120</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">absolute</span>;
+  <span style="color:#000;font-weight:bold">top</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">left</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-5cbb2a520434d949.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>
+<h3 id="宽高未知的元素">宽高未知的元素</h3>
+</li>
+</ul>
+<p>如果你不知道宽度和高度，你可以使用transform属性和在两个方向上的负translate（它基于当前元素的宽度/高度）到中心，即：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">parent</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+}
+.<span style="color:#458;font-weight:bold">child</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">absolute</span>;
+  <span style="color:#000;font-weight:bold">top</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">left</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">transform</span>: <span style="color:#0086b3">translate</span>(<span style="color:#099">-50</span><span style="color:#458;font-weight:bold">%</span>, <span style="color:#099">-50</span><span style="color:#458;font-weight:bold">%</span>);
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>代码示例：
+=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>&gt;
+  
+  &lt;<span style="color:#000080">div</span>&gt;
+     I&#39;m a block-level element of an unknown height and width, centered vertically within my parent.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">60</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">auto</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">both</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">transform</span>: <span style="color:#0086b3">translate</span>(<span style="color:#099">-50</span><span style="color:#458;font-weight:bold">%</span>, <span style="color:#099">-50</span><span style="color:#458;font-weight:bold">%</span>);
+  <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">absolute</span>;
+  <span style="color:#000;font-weight:bold">top</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">left</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">both</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-b580cc10159af85f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>
+<h3 id="使用flexbox居中">使用flexbox居中</h3>
+</li>
+</ul>
+<p>要用flexbox向两个方向居中，你需要使用两个中心属性，即：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">parent</span> {
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">flex</span>;
+  <span style="color:#000;font-weight:bold">justify-content</span>: <span style="color:#000;font-weight:bold">center</span>;
+  <span style="color:#000;font-weight:bold">align-items</span>: <span style="color:#000;font-weight:bold">center</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>&gt;
+  
+  &lt;<span style="color:#000080">div</span>&gt;
+     I&#39;m a block-level-ish element of an unknown width and height, centered vertically within my parent.
+  &lt;/<span style="color:#000080">div</span>&gt;
+  
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#000080">body</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#099">#f06d06</span>;
+  <span style="color:#000;font-weight:bold">font-size</span>: <span style="color:#099">80</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+}
+
+<span style="color:#000080">main</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">60</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">auto</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">flex</span>;
+  <span style="color:#000;font-weight:bold">justify-content</span>: <span style="color:#000;font-weight:bold">center</span>;
+  <span style="color:#000;font-weight:bold">align-items</span>: <span style="color:#000;font-weight:bold">center</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">both</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+
+<span style="color:#000080">main</span> <span style="color:#000080">div</span> {
+  <span style="color:#000;font-weight:bold">background</span>: <span style="color:#000;font-weight:bold">black</span>;
+  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
+  <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">50</span><span style="color:#458;font-weight:bold">%</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">20</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">resize</span>: <span style="color:#000;font-weight:bold">both</span>;
+  <span style="color:#000;font-weight:bold">overflow</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-624191a185674c76.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li>
+<h3 id="使用grid居中">使用grid居中</h3>
+</li>
+</ul>
+<p>这只是一个非常有效的小技巧（由Lance Janssen上传）
+=&gt;html代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;wrapper&#34;</span>&gt;
+    &lt;<span style="color:#000080">span</span>&gt; I&#39;m centered!&lt;/<span style="color:#000080">span</span>&gt;
+&lt;/<span style="color:#000080">div</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;css代码</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">wrapper</span>{
+  <span style="color:#000;font-weight:bold">height</span>:<span style="color:#099">300</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">width</span>:<span style="color:#099">300</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">border</span>:<span style="color:#099">1</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#000;font-weight:bold">solid</span> <span style="color:#000;font-weight:bold">red</span>;
+  <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">grid</span>;
+}
+<span style="color:#000080">span</span> {
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#000;font-weight:bold">auto</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>=&gt;效果图
+<img src="https://upload-images.jianshu.io/upload_images/11827773-d23514099ff5e4ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://dreamqyq.github.io/">Enoch Qin</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://dreamqyq.github.io/post/CSS/css-how-center/">https://dreamqyq.github.io/post/CSS/css-how-center/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/CSS/css-layout-some-tips/">CSS左右布局、左中右布局以及一些小技巧</a></li>
+        
+        <li><a href="/post/CSS/i-met-css/">初识CSS</a></li>
+        
+        <li><a href="/post/Linux/Deepin-and-Windows8.1-dual-system-boot-item-recovery/">Deepin与Windows8.1双系统启动项恢复</a></li>
+        
+        <li><a href="/post/Linux/Linux-system-VI-M/">Linux系统中VI下莫名出现的^M</a></li>
+        
+        <li><a href="/post/HTTP/basic-knowledge-entry-http-request-response/">HTTP入门（请求与响应的基本知识）</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='https://dreamqyq.github.io/tags/CSS'>CSS</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "dreamqyq/dreamqyq.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://dreamqyq.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://dreamqyq.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/" title="使用Vue &#43; TypeScript &#43; TSX 实现CNode社区">使用Vue &#43; TypeScript &#43; TSX 实现CNode社区</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/collection-in-java-and-their-data-structure/" title="Collection体系的常用类及其背后的数据结构">Collection体系的常用类及其背后的数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/java-package-manage-and-maven/" title="Java的包管理与Maven">Java的包管理与Maven</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Linux/use-hugo-build-self-blog/" title="使用Hugo搭建个人博客网站">使用Hugo搭建个人博客网站</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/first-blog/" title="First Blog">First Blog</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/debounce-and-throttle-in-javascript/" title="JavaScript中的函数防抖动与节流">JavaScript中的函数防抖动与节流</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/HTTP/web-performance-optimization-steps/" title="Web性能优化详解">Web性能优化详解</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/inheritance-in-javascript/" title="JavaScript中的继承">JavaScript中的继承</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Algorithm/common-sorting-algorithms-javascript/" title="常见的排序算法（JavaScript实现）">常见的排序算法（JavaScript实现）</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/from-mvc-to-mvvmvue/" title="从MVC到MVVM（初识Vue）">从MVC到MVVM（初识Vue）</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li><a href="https://dreamqyq.github.io/categories/Algorithm/">Algorithm (1)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/CSS/">CSS (8)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/HTTP/">HTTP (6)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Java/">Java (2)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/JavaScript/">JavaScript (11)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Linux/">Linux (4)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">前端基础 (3)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架 (3)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://dreamqyq.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://dreamqyq.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Deepin/">Deepin</a>
+    
+    <a href="https://dreamqyq.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Java/">Java</a>
+    
+    <a href="https://dreamqyq.github.io/tags/JavaScript/">JavaScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Maven/">Maven</a>
+    
+    <a href="https://dreamqyq.github.io/tags/TypeScript/">TypeScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://dreamqyq.github.io/tags/git/">git</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">命令行</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://www.jianshu.com/u/150c4ef48860" title="个人简书博客">Enoch 的简书主页</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://dreamqyq.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div class="container">
+        &copy; 2020 <a href="https://dreamqyq.github.io/">Enoch&#39;s Blog By Enoch Qin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/flysnow-org/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-163504763-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前端基础 on Enoch&#39;s Blog</title>
+    <link>https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/</link>
+    <description>Recent content in 前端基础 on Enoch&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 18 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初级前端需要知道的基础知识</title>
+      <link>https://dreamqyq.github.io/post/Front-end-base/basic-knowledge-primary-front-end-needs-to-know/</link>
+      <pubDate>Wed, 18 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/Front-end-base/basic-knowledge-primary-front-end-needs-to-know/</guid>
+      <description>前言：本文会罗列出十道比较基础的题目，我个人作为刚入门的初级前端，写这篇文章正好可以总结汇总一下近期的知识，看到这篇文章的朋友也可以看看这十道题你是否都能正确的、完整的答出来。我个人会总结出答案放于文后，欢迎讨论。 题目详情： 1、请写出一个符合 W3C 规范的 HTML 文件，要求如下： 页面标题为「</description>
+    </item>
+    
+    <item>
+      <title>git 入门</title>
+      <link>https://dreamqyq.github.io/post/Front-end-base/introduction-to-git/</link>
+      <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/Front-end-base/introduction-to-git/</guid>
+      <description>前言：是一个分散式版本控制软件，最初由林纳斯·托瓦兹制作，于2005年以GPL协议出品。如网站github，本文简单的介绍一些的git 的常用操作。 1、 git init 命令作用：在当前目录新建一个Git代码库 使用时间：当需要创建新仓库时使用 代码实例：git init 2、 git add 命令作用：添加指定文件到暂存</description>
+    </item>
+    
+    <item>
+      <title>命令行初识（介绍常用命令）</title>
+      <link>https://dreamqyq.github.io/post/Front-end-base/command-line-tcommonly-used-command/</link>
+      <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/Front-end-base/command-line-tcommonly-used-command/</guid>
+      <description>1、ls命令 —— 显示当前目录下的路径 该命令对应的单词是list ，其不加参数时不显示隐藏文件。中包含以下常用的参数说明： ls -a 显示当前目录下的所有文件（包括以.开头的隐藏文件） ls -l显示当前目录下文件的详细信息 ls -al 显示当前目录下的所有文件的详细信息 注：详细信息中的字母含义（drwx）</description>
+    </item>
+    
+  </channel>
+</rss>

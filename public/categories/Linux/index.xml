@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Enoch&#39;s Blog</title>
+    <link>https://dreamqyq.github.io/categories/Linux/</link>
+    <description>Recent content in Linux on Enoch&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 12 Apr 2020 19:41:28 +0800</lastBuildDate>
+    
+	<atom:link href="https://dreamqyq.github.io/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用Hugo搭建个人博客网站</title>
+      <link>https://dreamqyq.github.io/post/Linux/use-hugo-build-self-blog/</link>
+      <pubDate>Sun, 12 Apr 2020 19:41:28 +0800</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/Linux/use-hugo-build-self-blog/</guid>
+      <description>前言 两年前用Hexo搭建博客，但是因为各种配置问题没有继续跟进，之后就一直在简书写的博客。恰逢看到新的博客生成工具Hugo，所以重新搭建了一个个人博客网站，通过Github Pages，域名重定向来实现线上访问。本文介绍的就是如何使用Hugo搭建个人博客网站的过程。 Hugo简介 不同</description>
+    </item>
+    
+    <item>
+      <title>关于Deepin突然死机、重启后黑屏无法操作</title>
+      <link>https://dreamqyq.github.io/post/Linux/deepin-suddenly-after-crash-restart-black-screen-cant-operate/</link>
+      <pubDate>Fri, 13 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/Linux/deepin-suddenly-after-crash-restart-black-screen-cant-operate/</guid>
+      <description>前言：使用deepin系统也有一段时间了，但因为其不稳定性，着实出现了一些bug ，不过绝大多数都能用重启来解决，直到今天，我的deepin差点崩掉。 出现的问题 这次出现的问题大致如题目所说，下面详细描述一下： 在我因为正常的一系列操作后，首先是出现了鼠标错位的情况，然后我日常Goog</description>
+    </item>
+    
+    <item>
+      <title>Deepin与Windows8.1双系统启动项恢复</title>
+      <link>https://dreamqyq.github.io/post/Linux/Deepin-and-Windows8.1-dual-system-boot-item-recovery/</link>
+      <pubDate>Mon, 14 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/Linux/Deepin-and-Windows8.1-dual-system-boot-item-recovery/</guid>
+      <description>前言： 这两天在折腾双系统，打算体验一下传说中的Linux的美妙之处，由于是第一次使用Linux，并且主旨不在折腾系统，只是想尝试Linux的环境以及更优雅的写代码，所以选择了相对不折腾的Deepin，但是还是遇到了各种奇葩的问题。比如这篇文章要写的启动项。 问题起因 安装完deepi</description>
+    </item>
+    
+    <item>
+      <title>Linux系统中VI下莫名出现的^M</title>
+      <link>https://dreamqyq.github.io/post/Linux/Linux-system-VI-M/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/Linux/Linux-system-VI-M/</guid>
+      <description>本文写自我从windows转到Linux系统下，各种找bug的日常 首先就是我在windows下写的运行很正常的bash脚本和node脚本，在Linux的终端里用vim运行，各种报错。 比如运行这一句：#! /usr/bin/env node旨在让node文件可以直接默认用node运行，而不用node file</description>
+    </item>
+    
+  </channel>
+</rss>

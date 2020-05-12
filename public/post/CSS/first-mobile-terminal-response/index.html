@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>初识移动端（响应式） | Enoch&#39;s Blog</title>
+    <meta property="og:title" content="初识移动端（响应式） - Enoch&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-06-07T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-06-07T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="JavaScript、Java">
+    <meta name="description" content="初识移动端（响应式）">
+        
+    <meta name="author" content="Enoch Qin">
+    <meta property="og:url" content="https://dreamqyq.github.io/post/CSS/first-mobile-terminal-response/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4031353640611810",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://dreamqyq.github.io/">
+                        Enoch&#39;s Blog
+                    </a>
+                
+                <p class="description">前端开发工程师</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://dreamqyq.github.io/">首页</a>
+                    
+                    <a  href="https://dreamqyq.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://dreamqyq.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        margin: 0;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1媒体查询httpsdevelopermozillaorgzh-cndocswebguidecssmedia_queries附带mdn解释">1、<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries">媒体查询</a>（附带MDN解释）</a></li>
+    <li><a href="#2关于-meta-viewport">2、关于 <code>meta viewport</code></a></li>
+    <li><a href="#3学会隐藏元素">3、学会隐藏元素</a></li>
+    <li><a href="#4移动端与pc端设计的一些区别">4、移动端与PC端设计的一些区别</a></li>
+    <li><a href="#5国内大多数网站的设计思路">5、国内大多数网站的设计思路</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">初识移动端（响应式）</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年6月7日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://dreamqyq.github.io/categories/CSS'>CSS</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p><strong>前言</strong>：今天初次了解了移动端的一些常识，包括PC端和移动端的区别，媒体查询等的相关操作,以及国内的网站如何实现不同的端展示不同的样式。</p>
+<hr>
+<h2 id="1媒体查询httpsdevelopermozillaorgzh-cndocswebguidecssmedia_queries附带mdn解释">1、<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries">媒体查询</a>（附带MDN解释）</h2>
+<blockquote>
+<p>一个媒体查询由一个可选的媒体类型和零个或多个使用媒体功能的限制了样式表范围的表达式组成，例如宽度、高度和颜色。媒体查询，添加自CSS3，允许内容的呈现针对一个特定范围的输出设备而进行裁剪，而不必改变内容本身。</p>
+</blockquote>
+<ul>
+<li><strong>例1</strong>：（通过不同的媒体查询使不同的CSS文件生效，即css文件一定会被下载，媒体查询仅可以控制其是否生效，下面的例子是指宽度为0-800px之间时生效）</li>
+</ul>
+<pre><code>&lt;!-- link元素中的CSS媒体查询 --&gt;
+&lt;link rel=&quot;stylesheet&quot; media=&quot;(max-width: 800px)&quot; href=&quot;example.css&quot; /&gt;
+</code></pre><ul>
+<li><strong>例2</strong>：（通过不同的媒体查询使不同的CSS样式生效，下面的例子是指宽度在0-600px之间时样式生效）</li>
+</ul>
+<pre><code>&lt;!-- 样式表中的CSS媒体查询 --&gt;
+&lt;style&gt;
+@media (max-width: 600px) {
+  .facet_sidebar {
+    display: none;
+  }
+}
+&lt;/style&gt;
+</code></pre><ul>
+<li>
+<p><strong>注</strong>：通过类似例2的方式设置样式时，可能需要这样的效果：<strong>浏览器宽度0-320px、321px-375px、376px-425px、426px以上，这四个宽度区间不同的样式</strong>，那么该如何设置呢？
+首先，如果按顺序<code>@media (max-width: 320px)</code>、 <code>@media (max-width: 375px)</code>、 <code> @media (max-width:425px)</code>、 <code>@media (min-width: 426px)</code>这么写的化，会出现一个现象，即所有宽度的样式都是376px-426px状态下的样式，这是因为后出现的<code> @media (max-width:425px)</code>包含的是0-425px的情形，所以覆盖了前面的样式设置。
+所以目前有两种写法，（1）<strong>倒着写</strong>，即先写宽度426px以上的，然后写376px-425px之间的，以此类推；（2）<strong>用and连接确定区间的两个端点</strong>，如<code>@media (min-width: 376px) and (max-width:425px)</code></p>
+</li>
+<li>
+<p>媒体查询需要注意的地方</p>
+</li>
+</ul>
+<ol>
+<li>如果页面需要做移动端和pc端两套样式，建议<code>Mobile First</code>，即移动端优先</li>
+<li>手机端的媒体查询，一般采用<code>@media ( max-width:450px; )</code>，即最大宽度为450px左右。</li>
+</ol>
+<h2 id="2关于-meta-viewport">2、关于 <code>meta viewport</code></h2>
+<p>在移动端做网页，还需要添加这么一行代码：
+<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</code></p>
+<p>这是由历史原因的：
+由于刚开始智能手机还没有出现，所有的网站都是只给PC端来看的，手机基本无法看到网页。后来诺基亚大火（此时仍然没有智能手机的出现），诺基亚用户想要比较优雅的看网页，所以很多网站为此专门做了一套“ <strong>wap</strong> ”页面，“ wap ”页面语与HTML法类似，但并非HTML。
+直到<strong>iPhone 3GS</strong> 的出现，智能手机开始逐渐进入人们的视线，当时的iPhone 3GS 屏幕宽只有320px，而那时的网站一般都在九百多像素，为了在智能手机上展示网页，当时苹果的做法是：<strong>把所有的网站都缩小</strong>，然后可以两个手指拖动来放大页面，而这么做的缩放比例是什么呢？就是<strong>用320px宽的屏幕模拟980px宽的网页</strong>（980px这个值是通过市场调研所得，这是不成文的规定），所以虽然手机的分辨率宽度只有三百多像素，但是通过<code>document.documentElement.clientWidth</code>来获取网页宽度，一定得到的是980px。
+而如今我们的智能手机发展迅速，基本所有网站都会专门为移动端设计样式，而手机默认会缩小我们的网站，为了阻止网页的自动缩放，所以有了这句代码：
+<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;</code></p>
+<p>然后来解释一下这段代码的意思：
+<code>name=&quot;viewport&quot;</code> 记住viewport是视口的意思就好啦
+<code>width=device-width</code> 宽度=设备宽度，此时获取页面宽度，设备宽就是页面宽
+<code>user-scalable=no</code> 禁止用户缩放
+<code>initial-scale=1.0</code> 初始缩放倍数 1.0
+<code>maximum-scale=1.0</code> 最大缩放倍数 1.0
+<code>minimum-scale=1.0</code> 最小缩放倍数 1.0</p>
+<h2 id="3学会隐藏元素">3、学会隐藏元素</h2>
+<p>移动端设计中，很重要的一条就是要学会<strong>隐藏元素</strong>，例如这个网站 <a href="https://www.smashingmagazine.com/">https://www.smashingmagazine.com/</a>，就是根据网页宽度来响应式不同的样式。以该网站的导航栏为例，它根据页面宽度大致三有种不同的样式</p>
+<ul>
+<li>
+<p>宽度较大时，它的导航栏是这样的，左边有logo，中间是导航栏的各种按钮，右边是可以点击的Topics按钮：
+<img src="https://upload-images.jianshu.io/upload_images/11827773-a9e22d727d1508ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="完整的导航栏"></p>
+</li>
+<li>
+<p>宽度逐渐缩小，导航栏中间按钮下边的小字消失了：
+<img src="https://upload-images.jianshu.io/upload_images/11827773-464d5162de126493.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+</li>
+<li>
+<p>宽度继续缩小，出现最后一种样式，导航栏中间的按钮消失，而右边原来的Topics按钮，现在变为Menu按钮：
+<img src="https://upload-images.jianshu.io/upload_images/11827773-3bdae1bbb12c894c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">
+而Menu点击后才出现链接：
+<img src="https://upload-images.jianshu.io/upload_images/11827773-d096315f40deaf1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="点击Menu按钮后的样式"></p>
+</li>
+</ul>
+<p><strong>做出上述效果，最主要的就是在不同的宽度时，让该出现的元素出现，不该出现的元素隐藏起来</strong>*</p>
+<h2 id="4移动端与pc端设计的一些区别">4、移动端与PC端设计的一些区别</h2>
+<ul>
+<li><strong>没有 hover 效果</strong>（因此尽量少的使用CSS中的hover可以在从PC端改到移动端开发时更少的修改代码，相反的，如果hover在开发时使用的过多，到移动端时网页样式多半就废了）</li>
+<li><strong>有 touch 事件</strong> 移动端是可以触摸的，所以需要使用touch触摸监听</li>
+<li><strong>没有 resize</strong> 即在移动端，浏览器的宽高是无法更改的，其宽高就等于设备的宽高。</li>
+<li><strong>没有滚动条</strong> 横向纵向都没有滚动条，超出屏幕的内容通过滑动屏幕来观看</li>
+<li><strong>移动端需要设置滑动事件</strong> 但是原生JS是没有滑动事件的，不过包括jquery、Vue等框架都封装的有swipe事件可以实现滑动效果</li>
+</ul>
+<h2 id="5国内大多数网站的设计思路">5、国内大多数网站的设计思路</h2>
+<p>在国内，如果网页需要在不同的设备拥有不同的样式，他们很少像第二条中展示的smashingmagazine网站一样做响应式，大体上有以下两种思路：</p>
+<ul>
+<li>不同的端跳转到不同的域名，比如<a href="https://www.taobao.com/">淘宝</a>、<a href="https://www.jd.com/">京东</a>，他们的PC端会跳转到www.taobao.com域名（或www.jd.com），而移动端会跳转到h5.m.taobao.com（或m.jd.com/）</li>
+<li>不同的端通过识别user Agent，来渲染不同的CSS样式，如<a href="https://www.zhihu.com/">知乎</a></li>
+<li>另外，由于如今智能设备发展迅猛，如果一个页面要有多端显示样式的话，建议“mobile-first”，即优先完成移动端的样式，然后再做PC端。</li>
+</ul>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://dreamqyq.github.io/">Enoch Qin</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://dreamqyq.github.io/post/CSS/first-mobile-terminal-response/">https://dreamqyq.github.io/post/CSS/first-mobile-terminal-response/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/CSS/css-stacked-context/">CSS堆叠上下文</a></li>
+        
+        <li><a href="/post/CSS/element-width-and-height-and-skills/">元素的高度与宽度以及衍生技巧</a></li>
+        
+        <li><a href="/post/CSS/css-how-center/">CSS如何居中</a></li>
+        
+        <li><a href="/post/CSS/css-layout-some-tips/">CSS左右布局、左中右布局以及一些小技巧</a></li>
+        
+        <li><a href="/post/CSS/i-met-css/">初识CSS</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='https://dreamqyq.github.io/tags/CSS'>CSS</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "dreamqyq/dreamqyq.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://dreamqyq.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://dreamqyq.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/" title="使用Vue &#43; TypeScript &#43; TSX 实现CNode社区">使用Vue &#43; TypeScript &#43; TSX 实现CNode社区</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/collection-in-java-and-their-data-structure/" title="Collection体系的常用类及其背后的数据结构">Collection体系的常用类及其背后的数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/java-package-manage-and-maven/" title="Java的包管理与Maven">Java的包管理与Maven</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Linux/use-hugo-build-self-blog/" title="使用Hugo搭建个人博客网站">使用Hugo搭建个人博客网站</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/first-blog/" title="First Blog">First Blog</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/debounce-and-throttle-in-javascript/" title="JavaScript中的函数防抖动与节流">JavaScript中的函数防抖动与节流</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/HTTP/web-performance-optimization-steps/" title="Web性能优化详解">Web性能优化详解</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/inheritance-in-javascript/" title="JavaScript中的继承">JavaScript中的继承</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Algorithm/common-sorting-algorithms-javascript/" title="常见的排序算法（JavaScript实现）">常见的排序算法（JavaScript实现）</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/from-mvc-to-mvvmvue/" title="从MVC到MVVM（初识Vue）">从MVC到MVVM（初识Vue）</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li><a href="https://dreamqyq.github.io/categories/Algorithm/">Algorithm (1)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/CSS/">CSS (8)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/HTTP/">HTTP (6)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Java/">Java (2)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/JavaScript/">JavaScript (11)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Linux/">Linux (4)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">前端基础 (3)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架 (3)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://dreamqyq.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://dreamqyq.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Deepin/">Deepin</a>
+    
+    <a href="https://dreamqyq.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Java/">Java</a>
+    
+    <a href="https://dreamqyq.github.io/tags/JavaScript/">JavaScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Maven/">Maven</a>
+    
+    <a href="https://dreamqyq.github.io/tags/TypeScript/">TypeScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://dreamqyq.github.io/tags/git/">git</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">命令行</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://www.jianshu.com/u/150c4ef48860" title="个人简书博客">Enoch 的简书主页</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://dreamqyq.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div class="container">
+        &copy; 2020 <a href="https://dreamqyq.github.io/">Enoch&#39;s Blog By Enoch Qin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/flysnow-org/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-163504763-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+</body>
+
+</html>

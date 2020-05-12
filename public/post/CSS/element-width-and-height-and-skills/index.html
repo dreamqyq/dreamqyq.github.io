@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>元素的高度与宽度以及衍生技巧 | Enoch&#39;s Blog</title>
+    <meta property="og:title" content="元素的高度与宽度以及衍生技巧 - Enoch&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-06-01T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-06-01T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="JavaScript、Java">
+    <meta name="description" content="元素的高度与宽度以及衍生技巧">
+        
+    <meta name="author" content="Enoch Qin">
+    <meta property="og:url" content="https://dreamqyq.github.io/post/CSS/element-width-and-height-and-skills/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4031353640611810",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://dreamqyq.github.io/">
+                        Enoch&#39;s Blog
+                    </a>
+                
+                <p class="description">前端开发工程师</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://dreamqyq.github.io/">首页</a>
+                    
+                    <a  href="https://dreamqyq.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://dreamqyq.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        margin: 0;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1块级元素宽高">1、块级元素宽高</a></li>
+    <li><a href="#2内联元素">2、内联元素</a></li>
+    <li><a href="#3文档流或译为常规流normal-flow">3、文档流或译为常规流（normal flow）</a></li>
+    <li><a href="#4margin合并">4、margin合并</a></li>
+    <li><a href="#5常用的水平居中方法">5、常用的水平居中方法</a>
+      <ul>
+        <li><a href="#1块级元素水平居中">（1）块级元素水平居中：</a></li>
+        <li><a href="#2内联元素水平居中">（2）内联元素水平居中</a></li>
+      </ul>
+    </li>
+    <li><a href="#6常用的垂直居中方法">6、常用的垂直居中方法</a>
+      <ul>
+        <li><a href="#1父元素高度不确定">（1）父元素高度不确定</a></li>
+        <li><a href="#2父元素高度确定">（2）父元素高度确定</a></li>
+      </ul>
+    </li>
+    <li><a href="#7溢出省略效果">7、溢出省略效果</a></li>
+    <li><a href="#8中文单行两端对齐">8、中文单行两端对齐</a></li>
+    <li><a href="#9在不设置高度的情况下做一个高度为40px的div且内容垂直居中">9、在不设置高度的情况下，做一个高度为40px的div且内容垂直居中</a></li>
+    <li><a href="#10做一个空的宽高自适应的正方形">10、做一个空的宽高自适应的正方形</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">元素的高度与宽度以及衍生技巧</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年6月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://dreamqyq.github.io/categories/CSS'>CSS</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p>前言：本文主要写块级元素与内联元素的宽度与高度的相关知识，以及相关的衍生技巧，包括一些常用的居中方法等（与我的上一篇博客<a href="https://www.jianshu.com/p/ed4cf187c4f0">css如何居中</a>不同，上一篇是把所有能用来居中的方法都介绍了一遍，本篇只写常用的方法，可以应对80%的情况）</p>
+<h2 id="1块级元素宽高">1、块级元素宽高</h2>
+<ul>
+<li><strong>块级元素的高度由其内部文档流的高度的总和决定的</strong></li>
+<li><strong>块级元素的宽度</strong>：默认占一整行即<code>width:100%;</code> 另外，不论width设置的有多窄，一个块级元素永远都会<strong>占据一整行</strong>的空间</li>
+<li>注：在非必要情况下，尽量不要设置height属性，要撑起所需的高度，可以设置padding或line-height等，不仅不容易出现bug，而且容易设置垂直居中。</li>
+</ul>
+<h2 id="2内联元素">2、内联元素</h2>
+<ul>
+<li><strong>内联元素的高度</strong>由其内部文字字体的<strong>建议行高</strong>决定</li>
+<li><strong>内敛元素的宽度</strong>由其内容的宽度决定</li>
+<li>margin属性padding属性会影响内联元素的宽度但不影响其高度，border属性影响其高度宽度</li>
+<li>不论<code>display:inline</code> 还是<code>display:inline-block</code>，编辑html时两个内联元素之间有一个或多个空格、回车，在显示的时候都会自动转换为一个空格。</li>
+</ul>
+<h2 id="3文档流或译为常规流normal-flow">3、文档流或译为常规流（normal flow）</h2>
+<ul>
+<li>文档流：对文档的读取和输出的顺序. 其遵循内联元素从左到右,块级元素从上到下的读取, 输出和显示顺序；</li>
+</ul>
+<p>以下设置会脱离文档流：</p>
+<ul>
+<li>绝对定位 <code>position:absolute；</code></li>
+<li>固定定位<code>positon:fixed</code></li>
+<li>浮动 <code>float</code></li>
+</ul>
+<h2 id="4margin合并">4、margin合并</h2>
+<ul>
+<li>行内元素左右margin不合并</li>
+<li>块级元素上下margin合并，合并后的margin为二者的最大值</li>
+<li>浮动元素margin不合并</li>
+<li>同级元素清除margin合并：
+（1）二者之间提添加一个边框宽度为0.1的div
+（2）二者设置<code>display:flex;</code>
+（3）二者设置<code>display:table</code></li>
+<li>父子元素的margin合并
+如图所示，子元素设置margin，父元素高度没有发生变化，导致看似是父元素有了margin，其实是margin合并了：
+<img src="https://upload-images.jianshu.io/upload_images/11827773-6d2bb7e3553c5bf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">若要清除父子元素的margin合并，为父元素设置<code>border</code>、 <code>padding</code> 或<code>overflow:hidden</code>（overflow不推荐使用）</li>
+</ul>
+<h2 id="5常用的水平居中方法">5、常用的水平居中方法</h2>
+<h3 id="1块级元素水平居中">（1）块级元素水平居中：</h3>
+<ul>
+<li>子元素不定宽：为子元素设置<code>margin: auto 20px;</code> （左右外边距相等即可）</li>
+<li>子元素定宽：为子元素设置<code>margin: 0 auto;</code></li>
+</ul>
+<h3 id="2内联元素水平居中">（2）内联元素水平居中</h3>
+<ul>
+<li>为父元素设置<code>text-align:center;</code></li>
+</ul>
+<h2 id="6常用的垂直居中方法">6、常用的垂直居中方法</h2>
+<h3 id="1父元素高度不确定">（1）父元素高度不确定</h3>
+<ul>
+<li>不论子元素高度是否确定，都可以给父元素上下相同的<code>padding</code>即可</li>
+</ul>
+<h3 id="2父元素高度确定">（2）父元素高度确定</h3>
+<ul>
+<li>单行文字垂直居中可以让父元素<code>line-height</code> = <code>height</code></li>
+<li>IE或比较古老的移动端设备：table布局</li>
+</ul>
+<pre><code>.parent{
+  display:table;
+  height:100px;
+  border:1px solid red;
+}
+.child{
+  display:table-cell;
+  vertical-align:middle;
+  text-align:center;
+}
+</code></pre><ul>
+<li>chrome及移动端：父元素flex布局</li>
+</ul>
+<pre><code>.parent{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+}
+</code></pre><ul>
+<li>父元素定高，子元素也固定宽高，也可以用绝对定位来居中</li>
+</ul>
+<pre><code>.parent{ 
+  height:300px;
+  position:relative;
+  border:1px solid red;
+}
+.child{
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  margin:auto;
+  width:100px;
+  height:200px;
+  border:1px solid green;
+}
+</code></pre><h2 id="7溢出省略效果">7、溢出省略效果</h2>
+<ul>
+<li>单行溢出省略效果</li>
+</ul>
+<pre><code>div{
+  border:1px solid red; 
+  width:100px;
+  text-overflow:ellipsis; /*文字超出部分用省略号代替*/
+  white-space:nowrap; /*不能换行*/
+  overflow:hidden; /*超出部分隐藏*/
+}
+</code></pre><p>效果图，原文字是this is demo and so on。超过div宽度即100px的部分用…代替：
+<img src="https://upload-images.jianshu.io/upload_images/11827773-9055c0ae84ea1130.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果图"></p>
+<ul>
+<li>多行溢出省略效果
+<strong>注：下面展示的样式设置对IE以及火狐浏览器不兼容，谨慎使用</strong></li>
+</ul>
+<pre><code>div{
+  border:1px solid red;
+  width:200px;
+  display:-webkit-box;
+  -webkit-line-clamp:3; /*只显示三行。溢出部分用省略号代替*/
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+</code></pre><p>效果图：
+<img src="https://upload-images.jianshu.io/upload_images/11827773-0c0d7d2372c6847e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果图"></p>
+<h2 id="8中文单行两端对齐">8、中文单行两端对齐</h2>
+<p>单行两端对齐的实现原理：<code>text-align:justify;</code>可以设置对齐方式为两端对齐但是只对多行文本有效果，想要实现单行文本需以下操作：</p>
+<ol>
+<li>首先要把内联元素变为<code>inline-block</code>（为了设置宽度）</li>
+<li>然后使用after伪元素为本来只有一行<code>span</code>的增加一行使得justify起作用（after伪元素的宽度需设置为100%用来撑起两端对齐的宽度）</li>
+<li>为<code>span</code>元素设置<code>overflow:hidden;</code> 把after伪元素增加的那一行隐藏起来使布局美观</li>
+</ol>
+<pre><code>span{
+  text-align:justify;
+  display:inline-block;
+  overflow:hidden;
+  line-height:20px;
+  height:20px;
+  width:4em;
+}
+span::after{
+  content:'';
+  display:inline-block;
+  width:100%;
+}
+</code></pre><p>效果图：姓名和联系方式都是两端对齐
+<img src="https://upload-images.jianshu.io/upload_images/11827773-7697b79293cf929a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果图"></p>
+<h2 id="9在不设置高度的情况下做一个高度为40px的div且内容垂直居中">9、在不设置高度的情况下，做一个高度为40px的div且内容垂直居中</h2>
+<p>这种设置方式，可以直接让文字垂直居中，并且带有响应式，贯彻一个理念：<strong>不要轻易设置height</strong>。</p>
+<pre><code>div{
+border:1px solid red;
+text-align:center;
+line-height:24px;
+padding:8px;
+}
+</code></pre><h2 id="10做一个空的宽高自适应的正方形">10、做一个空的宽高自适应的正方形</h2>
+<p>直接设置一个空的div样式为<code>{ padding-top:100% }</code> 即可。
+可以自适应父元素的宽高并形成一个空的不超出父元素且范围的最大的正方形。
+效果图（父元素设置了padding）：
+<img src="https://upload-images.jianshu.io/upload_images/11827773-256b6463bf4b346c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果图"></p>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://dreamqyq.github.io/">Enoch Qin</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://dreamqyq.github.io/post/CSS/element-width-and-height-and-skills/">https://dreamqyq.github.io/post/CSS/element-width-and-height-and-skills/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/CSS/css-how-center/">CSS如何居中</a></li>
+        
+        <li><a href="/post/CSS/css-layout-some-tips/">CSS左右布局、左中右布局以及一些小技巧</a></li>
+        
+        <li><a href="/post/CSS/i-met-css/">初识CSS</a></li>
+        
+        <li><a href="/post/Linux/Deepin-and-Windows8.1-dual-system-boot-item-recovery/">Deepin与Windows8.1双系统启动项恢复</a></li>
+        
+        <li><a href="/post/Linux/Linux-system-VI-M/">Linux系统中VI下莫名出现的^M</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='https://dreamqyq.github.io/tags/CSS'>CSS</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "dreamqyq/dreamqyq.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://dreamqyq.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://dreamqyq.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/" title="使用Vue &#43; TypeScript &#43; TSX 实现CNode社区">使用Vue &#43; TypeScript &#43; TSX 实现CNode社区</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/collection-in-java-and-their-data-structure/" title="Collection体系的常用类及其背后的数据结构">Collection体系的常用类及其背后的数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/java-package-manage-and-maven/" title="Java的包管理与Maven">Java的包管理与Maven</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Linux/use-hugo-build-self-blog/" title="使用Hugo搭建个人博客网站">使用Hugo搭建个人博客网站</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/first-blog/" title="First Blog">First Blog</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/debounce-and-throttle-in-javascript/" title="JavaScript中的函数防抖动与节流">JavaScript中的函数防抖动与节流</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/HTTP/web-performance-optimization-steps/" title="Web性能优化详解">Web性能优化详解</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/inheritance-in-javascript/" title="JavaScript中的继承">JavaScript中的继承</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Algorithm/common-sorting-algorithms-javascript/" title="常见的排序算法（JavaScript实现）">常见的排序算法（JavaScript实现）</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/from-mvc-to-mvvmvue/" title="从MVC到MVVM（初识Vue）">从MVC到MVVM（初识Vue）</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li><a href="https://dreamqyq.github.io/categories/Algorithm/">Algorithm (1)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/CSS/">CSS (8)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/HTTP/">HTTP (6)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Java/">Java (2)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/JavaScript/">JavaScript (11)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Linux/">Linux (4)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">前端基础 (3)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架 (3)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://dreamqyq.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://dreamqyq.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Deepin/">Deepin</a>
+    
+    <a href="https://dreamqyq.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Java/">Java</a>
+    
+    <a href="https://dreamqyq.github.io/tags/JavaScript/">JavaScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Maven/">Maven</a>
+    
+    <a href="https://dreamqyq.github.io/tags/TypeScript/">TypeScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://dreamqyq.github.io/tags/git/">git</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">命令行</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://www.jianshu.com/u/150c4ef48860" title="个人简书博客">Enoch 的简书主页</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://dreamqyq.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div class="container">
+        &copy; 2020 <a href="https://dreamqyq.github.io/">Enoch&#39;s Blog By Enoch Qin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/flysnow-org/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-163504763-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+</body>
+
+</html>

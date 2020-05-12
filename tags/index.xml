@@ -1,132 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Enoch&#39;s Blog</title>
-    <link>https://enochqin.xyz/tags/</link>
-    <description>Recent content in Tags on Enoch&#39;s Blog</description>
+    <title>Tags on Enoch Qin&#39;s Blog</title>
+    <link>http://example.org/tags/</link>
+    <description>Recent content in Tags on Enoch Qin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Tue, 12 May 2020 00:00:00 +0000</lastBuildDate>
+    <language>zh-Hans</language>
     
-	<atom:link href="https://enochqin.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>TypeScript</title>
-      <link>https://enochqin.xyz/tags/TypeScript/</link>
-      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/TypeScript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Vue</title>
-      <link>https://enochqin.xyz/tags/Vue/</link>
-      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/Vue/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://enochqin.xyz/tags/Java/</link>
-      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/Java/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Maven</title>
-      <link>https://enochqin.xyz/tags/Maven/</link>
-      <pubDate>Mon, 27 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/Maven/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>博客</title>
-      <link>https://enochqin.xyz/tags/%E5%8D%9A%E5%AE%A2/</link>
-      <pubDate>Sun, 12 Apr 2020 19:41:28 +0800</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/%E5%8D%9A%E5%AE%A2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JavaScript</title>
-      <link>https://enochqin.xyz/tags/JavaScript/</link>
-      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/JavaScript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HTTP</title>
-      <link>https://enochqin.xyz/tags/HTTP/</link>
-      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/HTTP/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Algorithm</title>
-      <link>https://enochqin.xyz/tags/Algorithm/</link>
-      <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/Algorithm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSS</title>
-      <link>https://enochqin.xyz/tags/CSS/</link>
-      <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/CSS/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Deepin</title>
-      <link>https://enochqin.xyz/tags/Deepin/</link>
-      <pubDate>Fri, 13 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/Deepin/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://enochqin.xyz/tags/Linux/</link>
-      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/Linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>git</title>
-      <link>https://enochqin.xyz/tags/git/</link>
-      <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>命令行</title>
-      <link>https://enochqin.xyz/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</link>
-      <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>

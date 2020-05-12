@@ -1,87 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Enoch&#39;s Blog</title>
-    <link>https://enochqin.xyz/categories/</link>
-    <description>Recent content in Categories on Enoch&#39;s Blog</description>
+    <title>Categories on Enoch Qin&#39;s Blog</title>
+    <link>http://example.org/categories/</link>
+    <description>Recent content in Categories on Enoch Qin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Tue, 12 May 2020 00:00:00 +0000</lastBuildDate>
+    <language>zh-Hans</language>
     
-	<atom:link href="https://enochqin.xyz/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://example.org/categories/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>前端框架</title>
-      <link>https://enochqin.xyz/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/</link>
-      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://enochqin.xyz/categories/Java/</link>
-      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/categories/Java/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://enochqin.xyz/categories/Linux/</link>
-      <pubDate>Sun, 12 Apr 2020 19:41:28 +0800</pubDate>
-      
-      <guid>https://enochqin.xyz/categories/Linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JavaScript</title>
-      <link>https://enochqin.xyz/categories/JavaScript/</link>
-      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/categories/JavaScript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HTTP</title>
-      <link>https://enochqin.xyz/categories/HTTP/</link>
-      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/categories/HTTP/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Algorithm</title>
-      <link>https://enochqin.xyz/categories/Algorithm/</link>
-      <pubDate>Mon, 17 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/categories/Algorithm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>前端基础</title>
-      <link>https://enochqin.xyz/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/</link>
-      <pubDate>Wed, 18 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSS</title>
-      <link>https://enochqin.xyz/categories/CSS/</link>
-      <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://enochqin.xyz/categories/CSS/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>

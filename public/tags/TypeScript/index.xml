@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeScript on Enoch&#39;s Blog</title>
+    <link>https://dreamqyq.github.io/tags/TypeScript/</link>
+    <description>Recent content in TypeScript on Enoch&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 12 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://dreamqyq.github.io/tags/TypeScript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用Vue &#43; TypeScript &#43; TSX 实现CNode社区</title>
+      <link>https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/</link>
+      <pubDate>Tue, 12 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/</guid>
+      <description>前言： 众所周知，Vue很优秀，TypeScript也很优秀，但是Vue + TypeScript就会出现各种奇奇怪怪的问题。本文就将介绍我在「CNode 社区」这个项目开发的过程中遇到一些问题和解决办法。希望对你在Vue中使用TypeScript有所帮助。 项目源码及预览地址 线上预览地址</description>
+    </item>
+    
+  </channel>
+</rss>

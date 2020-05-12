@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HTTP入门（请求与响应的基本知识） | Enoch&#39;s Blog</title>
+    <meta property="og:title" content="HTTP入门（请求与响应的基本知识） - Enoch&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2018-05-04T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2018-05-04T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="JavaScript、Java">
+    <meta name="description" content="HTTP入门（请求与响应的基本知识）">
+        
+    <meta name="author" content="Enoch Qin">
+    <meta property="og:url" content="https://dreamqyq.github.io/post/HTTP/basic-knowledge-entry-http-request-response/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4031353640611810",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://dreamqyq.github.io/">
+                        Enoch&#39;s Blog
+                    </a>
+                
+                <p class="description">前端开发工程师</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://dreamqyq.github.io/">首页</a>
+                    
+                    <a  href="https://dreamqyq.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://dreamqyq.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        margin: 0;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一http-请求">一、HTTP 请求</a>
+      <ul>
+        <li><a href="#1-http请求操作curl命令">1. http请求操作/curl命令</a></li>
+        <li><a href="#2-综上所得请求一共包含以下部分">2. 综上所得，请求一共包含以下部分</a></li>
+        <li><a href="#3-使用chrome浏览器查看http请求">3. 使用Chrome浏览器查看http请求</a></li>
+      </ul>
+    </li>
+    <li><a href="#二http-响应">二、HTTP 响应</a>
+      <ul>
+        <li><a href="#1http响应出现在请求结束后">1.http响应出现在请求结束后</a></li>
+        <li><a href="#2-http响应包含以下部分">2. http响应包含以下部分</a></li>
+        <li><a href="#3-关于响应的状态码">3. 关于响应的状态码</a></li>
+        <li><a href="#4-使用chrome浏览器查看http响应">4. 使用Chrome浏览器查看http响应</a></li>
+      </ul>
+    </li>
+    <li><a href="#三get-和-post-的区别是什么">三、GET 和 POST 的区别是什么</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">HTTP入门（请求与响应的基本知识）</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年5月4日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://dreamqyq.github.io/categories/HTTP'>HTTP</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p><strong>摘要</strong>：本文主要介绍HTTP的最基本的知识，包括request请求、response响应、常见的响应状态码、GET请求与POST请求的区别。</p>
+<h2 id="一http-请求">一、HTTP 请求</h2>
+<h3 id="1-http请求操作curl命令">1. http请求操作/curl命令</h3>
+<ul>
+<li><code> curl -s -v -H &quot;Frank: xxx&quot; -- &quot;https://www.baidu.com&quot;//GET获取操作</code>
+请求内容</li>
+</ul>
+<pre><code>GET / HTTP/1.1
+Host: www.baidu.com
+User-Agent: curl/7.54.0
+Accept: */*
+Frank: xxx
+
+</code></pre><ul>
+<li><code>curl -X POST -s -v -H &quot;Frank: xxx&quot; -- &quot;https://www.baidu.com&quot;//POST上传操作</code>
+请求内容</li>
+</ul>
+<pre><code>POST / HTTP/1.1
+Host: www.baidu.com
+User-Agent: curl/7.54.0
+Accept: */*
+Frank: xxx
+</code></pre><ul>
+<li><code>curl -X POST -d &quot;1234567890&quot; -s -v -H &quot;Frank: xxx&quot; -- &quot;https://www.baidu.com&quot;//POST上传带数据</code>
+请求内容</li>
+</ul>
+<pre><code>POST / HTTP/1.1
+Host: www.baidu.com
+User-Agent: curl/7.54.0
+Accept: */*
+yyy: xxx
+Content-Length: 10
+Content-Type: application/x-www-form-urlencoded
+
+1234567890
+</code></pre><p>注：第二部分中，至少需要有<code>Host</code>、<code>Content-Length</code>、<code>Content-Type</code></p>
+<h3 id="2-综上所得请求一共包含以下部分">2. 综上所得，请求一共包含以下部分</h3>
+<ul>
+<li>
+<p>1 动词 路径 协议/版本
+2 Key1: value1
+2 Key2: value2
+2 Key3: value3
+2 Content-Type: application/x-www-form-urlencoded
+2 Host: <a href="http://www.baidu.com">www.baidu.com</a>
+2 User-Agent: curl/7.54.0
+3
+4 要上传的数据</p>
+</li>
+<li>
+<p><strong>其中需要注意的是</strong>：</p>
+<ol>
+<li>请求最多包含四部分，最少包含三部分，即第四部分数据可以为空。</li>
+<li>第三部分永远都是一个回车，用来分隔第二、第四部分。</li>
+<li>第一部分的动词包括<code>GET</code>（获取）/<code>POST</code>（上传，新增）/<code>PUT</code>（整体更新）/<code>PATCH</code>（局部更新）/<code>DELETE</code>（删除）/<code>HEAD</code>（获取资源的元数据）/<code>OPTIONS</code>（获取信息，关于资源的哪些属性是客户端可以改变的）等。</li>
+<li>如果没有写路径，则默认为根目录（即 <code>/</code>）</li>
+<li>第二部分中的的 Content-Type 标注了第 4 部分的格式</li>
+<li>第一部分的路径，包含查询参数，但不包括锚点</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-使用chrome浏览器查看http请求">3. 使用Chrome浏览器查看http请求</h3>
+<ol>
+<li>打开 控制台中的Network面板</li>
+<li>地址栏输入网址</li>
+<li>在 Network 点击，查看 request，点击「view source」</li>
+<li>如果有请求的第四部分，那么在 FormData 或 Payload 里面可以看到</li>
+</ol>
+<p>举例说明（百度首页请求）：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/11827773-64f499129a9c15f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="百度首页请求"></p>
+<h2 id="二http-响应">二、HTTP 响应</h2>
+<h3 id="1http响应出现在请求结束后">1.http响应出现在请求结束后</h3>
+<p>如<code>curl -s -v -H &quot;Frank: xxx&quot; -- &quot;https://www.baidu.com&quot;//GET获取操作</code>
+获得的响应代码为：</p>
+<pre><code>HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform
+Connection: Keep-Alive
+Content-Length: 2443
+Content-Type: text/html
+Date: Tue, 10 Oct 2017 09:14:05 GMT
+Etag: &quot;5886041d-98b&quot;
+Last-Modified: Mon, 23 Jan 2017 13:24:45 GMT
+Pragma: no-cache
+Server: bfe/1.0.8.18
+Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+………………以下为网页html代码，略…………
+&lt;/html&gt;
+</code></pre><h3 id="2-http响应包含以下部分">2. http响应包含以下部分</h3>
+<ul>
+<li>1 协议/版本号 状态码 状态解释
+2 Key1: value1
+2 Key2: value2
+2 Content-Length: 17931
+2 Content-Type: text/html
+3
+4 要下载的内容</li>
+<li><strong>其中需要注意的是</strong>
+第 2 部分中的 Content-Type 标注了第 4 部分的格式
+第 2 部分中的 Content-Type 遵循 MIME 规范
+第一部分的状态解释没什么用</li>
+</ul>
+<h3 id="3-关于响应的状态码">3. 关于响应的状态码</h3>
+<ul>
+<li>
+<p>1xx消息：代表请求已被接受，需要继续处理。这类响应是临时响应，只包含状态行和某些可选的响应头信息，并以空行结束。（不常用，大致知道即可）</p>
+</li>
+<li>
+<p>2XX：表示成功</p>
+<ul>
+<li>200 OK：请求已成功，请求所希望的响应头或数据体将随此响应返回。</li>
+<li>204 No Content：表示请求已成功处理，但是没有内容返回，意思等同于请求执行成功，但是没有数据，浏览器不用刷新页面，也不用导向新的页面。</li>
+<li>206 Partial Content：服务器已经成功处理了部分GET请求。（客户端进行了范围请求） 响应报文中包含Content-Range指定范围的实体内容。</li>
+</ul>
+</li>
+<li>
+<p>3XX：重定向</p>
+<ul>
+<li>301 Moved Permanently：表示访问的资源被永久移除，即请求的资源已经永久的搬到了其他位置 。</li>
+<li>302 Found ：表示所访问的资源临时被移除，以后还会回来，即临时重定向，表示请求的资源临时搬到了其他位置 。</li>
+<li>303 See Other ：表示请求资源存在另一个URI，应使用GET定向获取请求资源 。</li>
+<li>304 Not Modified ：表示资源未被修改，即客户端仍然具有以前下载的副本，不需要重新传输资源。</li>
+<li>307 Temporary Redirect：临时重定向，和302有着相同含义 ，尽管302标准禁止POST变为GET，但没人听他的 ，而307就会遵照标准，不会从POST变为GET
+但处理响应行为，各个浏览器可能不同。</li>
+</ul>
+</li>
+<li>
+<p>4XX：客户端错误</p>
+<ul>
+<li>400 Bad Request：表示请求报文存在语法错误或参数错误，服务器不理解 ，服务器不应该重复提交这个请求 ，需要修改请求内容后再次发送。</li>
+<li>401 Unauthorized：表示发送的请求需要有HTTP认证信息或者是认证失败了 ，返回401的响应必须包含一个适用于被请求资源的WWW-Authenticate首部以质询用户信息 ，浏览器初次接受401时，会弹出认证窗口。</li>
+<li>403 Forbidden ：表示对请求资源的访问被服务器拒绝了 ，服务器可以对此作出解释，也可以不解释 ，想说明的话可以在响应实体的主体部分描述原因 。比如说你可能没有访问权限。</li>
+<li>404 Not Found：表示服务器找不到你请求的资源 ，但允许用户的后续请求。</li>
+</ul>
+</li>
+<li>
+<p>5XX：服务器错误</p>
+<ul>
+<li>500 Internal Server Error：通用错误消息，服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。没有给出具体错误信息。</li>
+<li>502 Bad Gateway：作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</li>
+<li>503 Service Unavailable：表示服务器超负载或正停机维护，无法处理请求 ，如果服务器知道还需要多长时间，就写入Retry-After首部字段返回。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-使用chrome浏览器查看http响应">4. 使用Chrome浏览器查看http响应</h3>
+<ol>
+<li>打开 Network</li>
+<li>输入网址</li>
+<li>选中第一个响应</li>
+<li>查看 Response Headers，点击「view source」</li>
+<li>你会看到响应的前两部分</li>
+<li>查看 Response 或者 Preview，你会看到响应的第 4 部分</li>
+</ol>
+<p>举个例子：百度首页响应代码</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/11827773-a69411105b833e6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="百度首页响应代码"></p>
+<h2 id="三get-和-post-的区别是什么">三、GET 和 POST 的区别是什么</h2>
+<p>这是一个很常见的面试题，我这里总结的答案是：</p>
+<ul>
+<li><strong>参数</strong>。GET 的参数放在 url 的<strong>查询参数里</strong>，POST 的参数（数据）放在<strong>请求消息体里</strong>。</li>
+<li><strong>安全</strong>。<strong>GET 没有 POST 安全</strong>（当然实际上二者都没有那么的安全）。因为GET请求很容易伪造（比如<code>&lt;a&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;link&gt;</code>、<code>&lt;script&gt;</code>、<code>&lt;form&gt;</code>标签都可以发送GET请求）。</li>
+<li><strong>数据长度</strong>。GET 的参数（url查询参数）有长度限制，一般是 <strong>1024 个字符</strong>。POST 的参数（数据）<strong>没有长度限制</strong>（话虽这么说，但实际POST还是有4~10Mb 的限制，但是相对于GET已经大多了）</li>
+<li><strong>包</strong>。GET 请求<strong>只需要发一个包</strong>，POST 请求需要发<strong>两个以上包</strong>（因为 POST 有消息体）（虽然GET 也可以用消息体但是不常用）</li>
+<li><strong>作用</strong>。GET 用来<strong>读数据</strong>，POST 用来<strong>写数据</strong>，POST <strong>不幂等</strong>（幂等的意思就是不管发多少次请求，结果都一样。）</li>
+</ul>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://dreamqyq.github.io/">Enoch Qin</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://dreamqyq.github.io/post/HTTP/basic-knowledge-entry-http-request-response/">https://dreamqyq.github.io/post/HTTP/basic-knowledge-entry-http-request-response/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/Front-end-base/introduction-to-git/">git 入门</a></li>
+        
+        <li><a href="/post/Front-end-base/command-line-tcommonly-used-command/">命令行初识（介绍常用命令）</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+        <li><a href="/search/">搜索</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='https://dreamqyq.github.io/tags/HTTP'>HTTP</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "dreamqyq/dreamqyq.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://dreamqyq.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://dreamqyq.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/" title="使用Vue &#43; TypeScript &#43; TSX 实现CNode社区">使用Vue &#43; TypeScript &#43; TSX 实现CNode社区</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/collection-in-java-and-their-data-structure/" title="Collection体系的常用类及其背后的数据结构">Collection体系的常用类及其背后的数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/java-package-manage-and-maven/" title="Java的包管理与Maven">Java的包管理与Maven</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Linux/use-hugo-build-self-blog/" title="使用Hugo搭建个人博客网站">使用Hugo搭建个人博客网站</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/first-blog/" title="First Blog">First Blog</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/debounce-and-throttle-in-javascript/" title="JavaScript中的函数防抖动与节流">JavaScript中的函数防抖动与节流</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/HTTP/web-performance-optimization-steps/" title="Web性能优化详解">Web性能优化详解</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/inheritance-in-javascript/" title="JavaScript中的继承">JavaScript中的继承</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Algorithm/common-sorting-algorithms-javascript/" title="常见的排序算法（JavaScript实现）">常见的排序算法（JavaScript实现）</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/from-mvc-to-mvvmvue/" title="从MVC到MVVM（初识Vue）">从MVC到MVVM（初识Vue）</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li><a href="https://dreamqyq.github.io/categories/Algorithm/">Algorithm (1)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/CSS/">CSS (8)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/HTTP/">HTTP (6)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Java/">Java (2)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/JavaScript/">JavaScript (11)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Linux/">Linux (4)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">前端基础 (3)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架 (3)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://dreamqyq.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://dreamqyq.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Deepin/">Deepin</a>
+    
+    <a href="https://dreamqyq.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Java/">Java</a>
+    
+    <a href="https://dreamqyq.github.io/tags/JavaScript/">JavaScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Maven/">Maven</a>
+    
+    <a href="https://dreamqyq.github.io/tags/TypeScript/">TypeScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://dreamqyq.github.io/tags/git/">git</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">命令行</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://www.jianshu.com/u/150c4ef48860" title="个人简书博客">Enoch 的简书主页</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://dreamqyq.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div class="container">
+        &copy; 2020 <a href="https://dreamqyq.github.io/">Enoch&#39;s Blog By Enoch Qin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/flysnow-org/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-163504763-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+</body>
+
+</html>

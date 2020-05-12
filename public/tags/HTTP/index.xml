@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTTP on Enoch&#39;s Blog</title>
+    <link>https://dreamqyq.github.io/tags/HTTP/</link>
+    <description>Recent content in HTTP on Enoch&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 23 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://dreamqyq.github.io/tags/HTTP/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Web性能优化详解</title>
+      <link>https://dreamqyq.github.io/post/HTTP/web-performance-optimization-steps/</link>
+      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/HTTP/web-performance-optimization-steps/</guid>
+      <description>摘要：本文通过 “ 一个页面从输入 URL 到页面加载显示完成 ” 的各个步骤，来详解阐述一下每一步可以如何优化，从而让我们的网页更快的展现在用户眼前，即网站加载速度变的更快，这种优化也就是题目所说的 Web 性能优化。 1、首先浏览器会看该网页是否已经被缓存 优化：除了 html 文件外，尽量使用缓存，浏览器缓存控</description>
+    </item>
+    
+    <item>
+      <title>浏览器缓存控制详解（cookie、session、localStorage、Cache-Control等）</title>
+      <link>https://dreamqyq.github.io/post/HTTP/browser-cache-control-steps-cookies-session-localstorage-cache-control-etc./</link>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/HTTP/browser-cache-control-steps-cookies-session-localstorage-cache-control-etc./</guid>
+      <description>摘要：本文将会详细的介绍浏览器实现缓存控制的相关知识，包括cookie、session、localStorage、Cache-Control、Expires、ETag、Last-Modified等概念。 注：在看本文之前建议可以先看一下网页中的登录注册功能是如何实现的，对前端和后端</description>
+    </item>
+    
+    <item>
+      <title>网页中的登录注册功能是如何实现的</title>
+      <link>https://dreamqyq.github.io/post/HTTP/web-site-is-how-to-implement-login-registration-function/</link>
+      <pubDate>Tue, 21 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/HTTP/web-site-is-how-to-implement-login-registration-function/</guid>
+      <description>摘要：登录注册是一个网站最常用的也是最基本的功能，本文就来详细的介绍一下在网页中，实现这两个最基本的需求从后端到前端需要做些什么。 注：本文所提到的所有代码都已上传至github ，可以直接clone后在终端使用测试。 一、前置知识： 基础知识可见我之前的博客：HTTP入门（请求与响应的</description>
+    </item>
+    
+    <item>
+      <title>用原生JS封装类jQuery的ajax方法</title>
+      <link>https://dreamqyq.github.io/post/HTTP/jquery-ajax-encapsulated-with-native-js/</link>
+      <pubDate>Thu, 26 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/HTTP/jquery-ajax-encapsulated-with-native-js/</guid>
+      <description>前言：为了深入理解jQuery中的ajax方法，本文通过使用原生JavaScript来封装一个类似的方法，能实现最基本的功能。其中会使用带promise方法。 1、ajax 的 基本功能 首先： request = new XMLHttpRequest() JS 可以设置任意请求 header ： 第一部分 request.open(&#39;get&#39;, &#39;/xxx&#39;) 第二部分 request.setRequestHeader(&#39;content-type&#39;,&#39;x-www-form-urlencoded&#39;) 第四部分 request.send(&#39;a=1&amp;amp;b=2&#39;) JS 可以获取任意响应 header 吗 第一部分 response.status</description>
+    </item>
+    
+    <item>
+      <title>JSONP、JSON、AJAX简述</title>
+      <link>https://dreamqyq.github.io/post/HTTP/JSONP-JSON-AJAX/</link>
+      <pubDate>Wed, 25 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/HTTP/JSONP-JSON-AJAX/</guid>
+      <description>前言：一个网站如果要完整的运行出来，必须要结合前端与后端，而我们作为一名前端，也是需要知道一些最基本的后端接口的知识。本文就简略的介绍一下这几个技术：JSONP、JSON、AJAX。 1、如何发请求 用 form 可以发请求，但是会刷新页面或新开页面 用 a 可以发 get 请求，但是也会刷新页面或新开页面</description>
+    </item>
+    
+    <item>
+      <title>HTTP入门（请求与响应的基本知识）</title>
+      <link>https://dreamqyq.github.io/post/HTTP/basic-knowledge-entry-http-request-response/</link>
+      <pubDate>Fri, 04 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://dreamqyq.github.io/post/HTTP/basic-knowledge-entry-http-request-response/</guid>
+      <description>摘要：本文主要介绍HTTP的最基本的知识，包括request请求、response响应、常见的响应状态码、GET请求与POST请求的区别。 一、HTTP 请求 1. http请求操作/curl命令 curl -s -v -H &amp;quot;Frank: xxx&amp;quot; -- &amp;quot;https://www.baidu.com&amp;quot;//GET获取</description>
+    </item>
+    
+  </channel>
+</rss>

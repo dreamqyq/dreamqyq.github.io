@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>使用Vue &#43; TypeScript &#43; TSX 实现CNode社区 | Enoch&#39;s Blog</title>
+    <meta property="og:title" content="使用Vue &#43; TypeScript &#43; TSX 实现CNode社区 - Enoch&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-05-12T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-05-12T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="JavaScript、Java">
+    <meta name="description" content="使用Vue &#43; TypeScript &#43; TSX 实现CNode社区">
+        
+    <meta name="author" content="Enoch Qin">
+    <meta property="og:url" content="https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4031353640611810",
+        enable_page_level_ads: true
+    });
+    </script>
+    
+
+
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://dreamqyq.github.io/">
+                        Enoch&#39;s Blog
+                    </a>
+                
+                <p class="description">前端开发工程师</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://dreamqyq.github.io/">首页</a>
+                    
+                    <a  href="https://dreamqyq.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://dreamqyq.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        margin: 0;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#项目源码及预览地址">项目源码及预览地址</a></li>
+    <li><a href="#项目简介">项目简介</a>
+      <ul>
+        <li><a href="#项目安装及启动">项目安装及启动</a></li>
+        <li><a href="#技术栈">技术栈</a></li>
+      </ul>
+    </li>
+    <li><a href="#vue--typescript-和-vue的常规写法有什么不同">Vue + TypeScript 和 Vue的常规写法有什么不同</a>
+      <ul>
+        <li><a href="#起手式">起手式</a></li>
+        <li><a href="#shims-tsxdtsshims-vuedts的作用"><code>shims-tsx.d.ts</code>、<code>shims-vue.d.ts</code>的作用</a></li>
+        <li><a href="#基于class的组件">基于class的组件</a></li>
+        <li><a href="#引入组件-import-component">引入组件 import component</a></li>
+        <li><a href="#data-数据">Data 数据</a></li>
+        <li><a href="#computed-计算属性">Computed 计算属性</a></li>
+        <li><a href="#methods-方法">Methods 方法</a></li>
+        <li><a href="#生命周期钩子">生命周期钩子</a></li>
+        <li><a href="#props">Props</a></li>
+        <li><a href="#ref">Ref</a></li>
+        <li><a href="#watch">Watch</a></li>
+        <li><a href="#emit">Emit</a></li>
+        <li><a href="#mixin">Mixin</a></li>
+        <li><a href="#vuex">Vuex</a></li>
+        <li><a href="#axios-封装">Axios 封装</a></li>
+      </ul>
+    </li>
+    <li><a href="#在vue中写tsx有哪些需要注意的地方">在Vue中写TSX有哪些需要注意的地方</a>
+      <ul>
+        <li><a href="#v-html">v-html</a></li>
+        <li><a href="#v-if">v-if</a></li>
+        <li><a href="#v-for">v-for</a></li>
+        <li><a href="#render">render</a></li>
+        <li><a href="#onclick事件传值tsx">onClick事件传值（TSX）</a></li>
+      </ul>
+    </li>
+    <li><a href="#开发过程中遇到的问题及解决">开发过程中遇到的问题及解决</a>
+      <ul>
+        <li><a href="#router-history模式">Router history模式</a></li>
+        <li><a href="#publicpath-部署应用包时的基本url">publicPath 部署应用包时的基本URL</a></li>
+        <li><a href="#base-标签"><!-- raw HTML omitted --> 标签</a></li>
+        <li><a href="#axios-withcredentials">Axios withCredentials</a></li>
+        <li><a href="#github-markdown-css">Github-markdown-css</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+
+    <article class="post">
+        <header>
+            <h1 class="post-title">使用Vue &#43; TypeScript &#43; TSX 实现CNode社区</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年5月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6'>前端框架</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <p><strong>前言</strong>： 众所周知，<code>Vue</code>很优秀，<code>TypeScript</code>也很优秀，但是<code>Vue</code> + <code>TypeScript</code>就会出现各种奇奇怪怪的问题。本文就将介绍我在「CNode 社区」这个项目开发的过程中遇到一些问题和解决办法。希望对你在<code>Vue</code>中使用<code>TypeScript</code>有所帮助。</p>
+<hr>
+<h2 id="项目源码及预览地址">项目源码及预览地址</h2>
+<ul>
+<li><a href="https://dreamqyq.github.io/cnode-community-preview/">线上预览地址</a></li>
+<li><a href="https://github.com/dreamqyq/cnode-community">项目源码</a> 欢迎star，欢迎pr。</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/11827773-10bd86751ca9a81a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果预览"></p>
+<hr>
+<h2 id="项目简介">项目简介</h2>
+<p>仿<a href="https://cnodejs.org/">CNode社区</a>，使用<code>Vue</code> + <code>TypeScript</code> + <code>TSX</code> 等相关技术栈实现了<a href="https://cnodejs.org/">原社区</a>的看帖、访问用户信息、查看回复列表、查看用户信息、博客列表页分页查看等功能。
+后端接口调用的是CNode 官方提供的<a href="https://cnodejs.org/api">api</a>。
+本项目中的所有组件都使用了Vue的渲染函数<code>render</code> 以及 <code>TSX</code>。</p>
+<h3 id="项目安装及启动">项目安装及启动</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn install
+yarn serve
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="技术栈">技术栈</h3>
+<ul>
+<li><code>Vue @2.6.11</code></li>
+<li><code>TypeScript</code></li>
+<li><code>TSX</code></li>
+<li><code>SCSS</code></li>
+</ul>
+<hr>
+<h2 id="vue--typescript-和-vue的常规写法有什么不同">Vue + TypeScript 和 Vue的常规写法有什么不同</h2>
+<h3 id="起手式">起手式</h3>
+<ol>
+<li>首先我们要把<code>&lt;script&gt;</code>标签的<code>lang</code>属性改为ts，即<code>&lt;script lang=&quot;ts&quot;&gt;</code></li>
+<li>要在Vue项目中引入 <code>vue-property-decorator</code>，后续很多操作都需要引用这个库里面的属性（包括<code>Vue</code>，<code>Component</code> 等）。</li>
+</ol>
+<h3 id="shims-tsxdtsshims-vuedts的作用"><code>shims-tsx.d.ts</code>、<code>shims-vue.d.ts</code>的作用</h3>
+<p>如果用vue-cli 直接生成一个「Vue + TS」的项目，我们会发现在 src 目录下出现了这两个文件，那么它们的作用是什么呢？</p>
+<ul>
+<li><code>shims-vue.d.ts</code>
+<blockquote>
+<p>shims-vue.d.ts 这个文件，主要用于 TypeScript 识别.vue 文件，Ts 默认并不支持导入 vue 文件，这个文件告诉 ts 导入.vue 文件都按VueConstructor<!-- raw HTML omitted -->处理，因此导入 vue 文件必须写.vue 后缀，但是这样同样的也会造成，就算你写的导入的 .vue 文件的路径就算是错的，静态检测也不会检测到错误，如果你把鼠标放上面你会看到错误的路径就是指向这个文件，因为你定义了这个模块是所有 .vue 后缀的导入都会指向到这个文件，但是如果你的路径是对的，ts 能读出正确的 module。</p>
+</blockquote>
+</li>
+<li><code>shims-tsx.d.ts</code>
+<blockquote>
+<p>shims-tsx.d.ts 文件，这个文件主要是方便你使用在 ts 中使用 jsx 语法的，如果不使用 jsx 语法，可以无视这个，但是强烈建议使用 jsx 语法，毕竟模板是没法获得静态类型提示的，当然，如果你境界高的话，直接用 vue render function。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="基于class的组件">基于class的组件</h3>
+<ul>
+<li>TypeScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#000080">script</span> <span style="color:#008080">lang</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;ts&#34;</span>&gt;
+<span style="color:#000;font-weight:bold">import</span> { Component, Vue } from <span style="color:#d14">&#39;vue-property-decorator&#39;</span>
+<span style="color:#a61717;background-color:#e3d2d2">@</span>Component
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> HelloWorld <span style="color:#000;font-weight:bold">extends</span> Vue {
+}
+&lt;/<span style="color:#000080">script</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>JavaScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#000080">script</span>&gt;
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> {
+  name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;HelloWorld&#39;</span>
+}
+&lt;/<span style="color:#000080">script</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="引入组件-import-component">引入组件 import component</h3>
+<ul>
+<li>TypeScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#000080">template</span>&gt;
+  &lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;main&#34;</span>&gt;
+    &lt;<span style="color:#000080">project</span> /&gt;
+  &lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#000080">template</span>&gt;
+&lt;<span style="color:#000080">script</span> <span style="color:#008080">lang</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;ts&#34;</span>&gt;
+<span style="color:#000;font-weight:bold">import</span> { Component, Vue } from <span style="color:#d14">&#39;vue-property-decorator&#39;</span>
+<span style="color:#000;font-weight:bold">import</span> Project from <span style="color:#d14">&#39;@/components/Project.vue&#39;</span>
+<span style="color:#a61717;background-color:#e3d2d2">@</span>Component({
+  components<span style="color:#000;font-weight:bold">:</span> {
+    project
+  }
+})
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> HelloWorld <span style="color:#000;font-weight:bold">extends</span> Vue {
+}
+&lt;/<span style="color:#000080">script</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>JavaScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#000080">template</span>&gt;
+  &lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;main&#34;</span>&gt;
+    &lt;<span style="color:#000080">project</span> /&gt;
+  &lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#000080">template</span>&gt;
+&lt;<span style="color:#000080">script</span>&gt;
+<span style="color:#000;font-weight:bold">import</span> Project from <span style="color:#d14">&#39;@/components/Project.vue&#39;</span>
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> {
+  name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;HelloWorld&#39;</span>,
+  components<span style="color:#000;font-weight:bold">:</span> {
+    project
+  }
+})
+&lt;/<span style="color:#000080">script</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="data-数据">Data 数据</h3>
+<ul>
+<li>TypeScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#a61717;background-color:#e3d2d2">@</span>Component
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> HelloWorld <span style="color:#000;font-weight:bold">extends</span> Vue {
+  <span style="color:#000;font-weight:bold">private</span> msg<span style="color:#000;font-weight:bold">:</span> string <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;welcome to my app&#34;</span>
+  <span style="color:#000;font-weight:bold">private</span> list<span style="color:#000;font-weight:bold">:</span> <span style="color:#0086b3">Array</span>&lt;<span style="color:#000080">object</span>&gt; <span style="color:#000;font-weight:bold">=</span> [
+    {
+      name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Preetish&#39;</span>,
+      age<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;26&#39;</span>
+    },
+    {
+      name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;John&#39;</span>,
+      age<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;30&#39;</span>
+    }
+  ]
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>JavaScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> {
+  data() {
+    <span style="color:#000;font-weight:bold">return</span> {
+      msg<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;welcome to my app&#34;</span>,
+      list<span style="color:#000;font-weight:bold">:</span> [
+        {
+          name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Preetish&#39;</span>,
+          age<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;26&#39;</span>
+        },
+        {
+          name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;John&#39;</span>,
+          age<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;30&#39;</span>
+        }
+      ]
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="computed-计算属性">Computed 计算属性</h3>
+<ul>
+<li>TypeScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> HelloWorld <span style="color:#000;font-weight:bold">extends</span> Vue {
+  get fullName()<span style="color:#000;font-weight:bold">:</span> string {
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">this</span>.first<span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#39; &#39;</span><span style="color:#000;font-weight:bold">+</span> <span style="color:#000;font-weight:bold">this</span>.last
+  }
+  set fullName(newValue<span style="color:#000;font-weight:bold">:</span> string) {
+    <span style="color:#000;font-weight:bold">let</span> names <span style="color:#000;font-weight:bold">=</span> newValue.split(<span style="color:#d14">&#39; &#39;</span>)
+    <span style="color:#000;font-weight:bold">this</span>.first <span style="color:#000;font-weight:bold">=</span> names[<span style="color:#099">0</span>]
+    <span style="color:#000;font-weight:bold">this</span>.last <span style="color:#000;font-weight:bold">=</span> names[names.length <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>]
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>JavaScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">computed<span style="color:#000;font-weight:bold">:</span> {
+  fullName<span style="color:#000;font-weight:bold">:</span> {
+    <span style="color:#998;font-style:italic">// getter
+</span><span style="color:#998;font-style:italic"></span>    get<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">function</span> () {
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">this</span>.firstName <span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#39; &#39;</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#000;font-weight:bold">this</span>.lastName
+    },
+    <span style="color:#998;font-style:italic">// setter
+</span><span style="color:#998;font-style:italic"></span>    set<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">function</span> (newValue) {
+      <span style="color:#000;font-weight:bold">var</span> names <span style="color:#000;font-weight:bold">=</span> newValue.split(<span style="color:#d14">&#39; &#39;</span>)
+      <span style="color:#000;font-weight:bold">this</span>.firstName <span style="color:#000;font-weight:bold">=</span> names[<span style="color:#099">0</span>]
+      <span style="color:#000;font-weight:bold">this</span>.lastName <span style="color:#000;font-weight:bold">=</span> names[names.length <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>]
+    }
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="methods-方法">Methods 方法</h3>
+<p>在TS里面写methods，就像写<code>class</code>中的方法一样，有一个可选的修饰符。</p>
+<ul>
+<li>TypeScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> HelloWorld <span style="color:#000;font-weight:bold">extends</span> Vue {
+  <span style="color:#000;font-weight:bold">public</span> clickMe()<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">void</span> {
+    console.log(<span style="color:#d14">&#39;clicked&#39;</span>)
+    console.log(<span style="color:#000;font-weight:bold">this</span>.addNum(<span style="color:#099">4</span>, <span style="color:#099">2</span>))
+  }
+  <span style="color:#000;font-weight:bold">public</span> addNum(num1<span style="color:#000;font-weight:bold">:</span> number, num2<span style="color:#000;font-weight:bold">:</span> number)<span style="color:#000;font-weight:bold">:</span> number {
+    <span style="color:#000;font-weight:bold">return</span> num1 <span style="color:#000;font-weight:bold">+</span> num2
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>JavaScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> {
+  methods<span style="color:#000;font-weight:bold">:</span> {
+    clickMe() {
+      console.log(<span style="color:#d14">&#39;clicked&#39;</span>)
+      console.log(<span style="color:#000;font-weight:bold">this</span>.addNum(<span style="color:#099">4</span>, <span style="color:#099">2</span>))
+    }
+    addNum(num1, num2) {
+      <span style="color:#000;font-weight:bold">return</span> num1 <span style="color:#000;font-weight:bold">+</span> num2
+    }
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="生命周期钩子">生命周期钩子</h3>
+<p>生命周期钩子的写法和上一条写<code>methods</code>是一样的。Vue组件具有八个生命周期挂钩，包括<code>created</code>，<code>mounted</code>等，并且每个挂钩使用相同的TypeScript语法。这些被声明为普通类方法。由于生命周期挂钩是自动调用的，因此它们既不带参数也不返回任何数据。因此，我们不需要访问修饰符，键入参数或返回类型。</p>
+<ul>
+<li>TypeScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> HelloWorld <span style="color:#000;font-weight:bold">extends</span> Vue {
+  mounted() {
+    <span style="color:#998;font-style:italic">//do something
+</span><span style="color:#998;font-style:italic"></span>  }
+  beforeUpdate() {
+    <span style="color:#998;font-style:italic">// do something
+</span><span style="color:#998;font-style:italic"></span>  }
+}
+
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>JavaScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> {
+  mounted() {
+    <span style="color:#998;font-style:italic">//do something
+</span><span style="color:#998;font-style:italic"></span>  }
+  beforeUpdate() {
+    <span style="color:#998;font-style:italic">// do something
+</span><span style="color:#998;font-style:italic"></span>  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="props">Props</h3>
+<p>我们可以在Vue的组件里面使用<code>@Prop</code>装饰器来替代 <code>props</code>，在Vue中，我们能给props提供额外的属性，比如<code>required</code>, <code>default</code>, <code>type</code>。如果用TypeScript，我们首先需要从<code>vue-property-decorator</code>引入<code>Prop</code>装饰器。我们甚至可以用TS提供的<code>readonly</code>来避免在代码中不小心修改了<code>props</code>。
+（备注：TypeScript中的赋值断言。<code>!:</code> 表示一定存在， <code>?:</code>表示可能不存在。）</p>
+<ul>
+<li>TypeScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#000;font-weight:bold">import</span> { Component, Prop, Vue } from <span style="color:#d14">&#39;vue-property-decorator&#39;</span>
+<span style="color:#a61717;background-color:#e3d2d2">@</span>Component
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> HelloWorld <span style="color:#000;font-weight:bold">extends</span> Vue {
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>Prop() readonly msg<span style="color:#000;font-weight:bold">!:</span> string
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>Prop({<span style="color:#000;font-weight:bold">default</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;John doe&#39;</span>}) readonly name<span style="color:#000;font-weight:bold">:</span> string
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>Prop({required<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">true</span>}) readonly age<span style="color:#000;font-weight:bold">:</span> number
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>Prop(<span style="color:#0086b3">String</span>) readonly address<span style="color:#000;font-weight:bold">:</span> string
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>Prop({required<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">false</span>, type<span style="color:#000;font-weight:bold">:</span> <span style="color:#0086b3">String</span>, <span style="color:#000;font-weight:bold">default</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Developer&#39;</span>}) readonly job<span style="color:#000;font-weight:bold">:</span> string
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>JavaScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue"><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> {
+  props<span style="color:#000;font-weight:bold">:</span> {
+    msg,
+    name<span style="color:#000;font-weight:bold">:</span> {
+      <span style="color:#000;font-weight:bold">default</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;John doe&#39;</span>
+    },
+    age<span style="color:#000;font-weight:bold">:</span> {
+      required<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">true</span>,
+    },
+    address<span style="color:#000;font-weight:bold">:</span> {
+      type<span style="color:#000;font-weight:bold">:</span> <span style="color:#0086b3">String</span>
+    },
+    job<span style="color:#000;font-weight:bold">:</span> {
+      required<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">false</span>,
+      type<span style="color:#000;font-weight:bold">:</span> string,
+      <span style="color:#000;font-weight:bold">default</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Developer&#39;</span>
+    }
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="ref">Ref</h3>
+<p>在Vue中我们经常会使用<code>this.$refs.xxx</code> 来调用某个组件中的方法，但是在使用TS的时候，有所不同：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#000080">Loading</span> <span style="color:#008080">ref</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;loading&#34;</span> /&gt;
+
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> Article <span style="color:#000;font-weight:bold">extends</span> Mixins(LoadingMixin) {
+  $refs<span style="color:#000;font-weight:bold">!:</span> {
+    loading<span style="color:#000;font-weight:bold">:</span> Loading;
+  };
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>在<code>$refs</code>里面声明之后，TS就可以识别到 ref 属性了，调用方式和JS一样：<code>this.$refs.loading.showLoading();</code></p>
+<h3 id="watch">Watch</h3>
+<p>要想用<code>watch</code>侦听器的话，在TS中就要使用<code>@Watch</code>装饰器（同样从<code>vue-property-decorator</code>引入）。</p>
+<ul>
+<li>TypeScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#000;font-weight:bold">@Watch</span>(<span style="color:#d14">&#39;name&#39;</span>)
+nameChanged(newVal: <span style="color:#458;font-weight:bold">string</span>) {
+  <span style="color:#000;font-weight:bold">this</span>.name <span style="color:#000;font-weight:bold">=</span> newVal
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>我们还可以给<code>watch</code>添加<code>immediate</code>和<code>deep</code>属性：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#000;font-weight:bold">@Watch</span>(<span style="color:#d14">&#39;name&#39;</span>)
+nameChanged(newVal: <span style="color:#458;font-weight:bold">string</span>) {
+  <span style="color:#000;font-weight:bold">this</span>.name <span style="color:#000;font-weight:bold">=</span> newVal
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>JavaScript 版本
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">watch<span style="color:#000;font-weight:bold">:</span> {
+  person<span style="color:#000;font-weight:bold">:</span> {
+      handler<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;projectChanged&#39;</span>,
+      immediate<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">true</span>,
+      deep<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">true</span>
+    }
+}
+methods<span style="color:#000;font-weight:bold">:</span> {
+  projectChanged(newVal, oldVal) {
+    <span style="color:#998;font-style:italic">// do something
+</span><span style="color:#998;font-style:italic"></span>  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="emit">Emit</h3>
+<p>这里同样要从<code>vue-property-decorator</code>引入装饰器<code>@Emit</code></p>
+<ul>
+<li>
+<p>TypeScript 版本</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#000;font-weight:bold">@Emit</span>()
+addToCount(n: <span style="color:#458;font-weight:bold">number</span>) {
+  <span style="color:#000;font-weight:bold">this</span>.count <span style="color:#000;font-weight:bold">+=</span> n
+}
+<span style="color:#000;font-weight:bold">@Emit</span>(<span style="color:#d14">&#39;resetData&#39;</span>)
+resetCount() {
+  <span style="color:#000;font-weight:bold">this</span>.count <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+}
+<span style="color:#000;font-weight:bold">@Emit</span>(<span style="color:#d14">&#39;getCount&#39;</span>)
+getCount(){
+  <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">this</span>.count
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>在上面这个例子中，<code>addToCount</code>方法回自动转换成<strong>kebab-case命名</strong>，即<strong>中划线命名</strong>，这和Vue的 emit 工作方式十分类似。
+而<code>resetCount</code>方法则不会自动转换成中划线命名，因为我们给<code>@Emit</code>传入了一个参数<code>resetCount</code>作为方法名。
+<code>getCount</code>这个方法可以向父组件传递参数，就像在JS中写成<code>this.$emit(&quot;getCount&quot;, this.count)</code>一样。</p>
+</li>
+<li>
+<p>JavaScript 版本</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">&lt;</span>some<span style="color:#000;font-weight:bold">-</span>component add<span style="color:#000;font-weight:bold">-</span>to<span style="color:#000;font-weight:bold">-</span>count<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;someMethod&#34;</span> <span style="color:#000;font-weight:bold">/&gt;</span>
+<span style="color:#000;font-weight:bold">&lt;</span>some<span style="color:#000;font-weight:bold">-</span>component reset<span style="color:#000;font-weight:bold">-</span>data<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;someMethod&#34;</span> <span style="color:#000;font-weight:bold">/&gt;</span>
+
+<span style="color:#998;font-style:italic">//Javascript Equivalent
+</span><span style="color:#998;font-style:italic"></span> methods<span style="color:#000;font-weight:bold">:</span> {
+    addToCount(n) {
+      <span style="color:#000;font-weight:bold">this</span>.count <span style="color:#000;font-weight:bold">+=</span> n
+      <span style="color:#000;font-weight:bold">this</span>.$emit(<span style="color:#d14">&#39;add-to-count&#39;</span>, n)
+    },
+    resetCount() {
+      <span style="color:#000;font-weight:bold">this</span>.count <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>
+      <span style="color:#000;font-weight:bold">this</span>.$emit(<span style="color:#d14">&#39;resetData&#39;</span>)
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="mixin">Mixin</h3>
+<p>想要在Vue+TypeScript中使用mixin，首先我们先创建一个mixin文件：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#000;font-weight:bold">import</span> { Component, Vue } from <span style="color:#d14">&#39;vue-property-decorator&#39;</span>
+<span style="color:#000;font-weight:bold">@Component</span>
+<span style="color:#000;font-weight:bold">class</span> ProjectMixin <span style="color:#000;font-weight:bold">extends</span> Vue {
+  <span style="color:#000;font-weight:bold">public</span> projName: <span style="color:#458;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;My project&#39;</span>
+  <span style="color:#000;font-weight:bold">public</span> setProjectName(newVal: <span style="color:#458;font-weight:bold">string</span>)<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">void</span> {
+    <span style="color:#000;font-weight:bold">this</span>.projName <span style="color:#000;font-weight:bold">=</span> newVal
+  }
+}
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> ProjectMixin
+</code></pre></td></tr></table>
+</div>
+</div><p>想要使用上面代码中的mixin，我们需要从<code>vue-property-decorator</code> 中引入 <code>Mixins</code> 以及 包含上述代码的mixins 文件，具体写法如下，主要不同就是组件不继承自<code>Vue</code>，而是继承自<code>Mixins</code>：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#000080">template</span>&gt;
+  &lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;project-detail&#34;</span>&gt;
+    {{ projectDetail }}
+  &lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#000080">template</span>&gt;
+&lt;<span style="color:#000080">script</span> <span style="color:#008080">lang</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;ts&#34;</span>&gt;
+<span style="color:#000;font-weight:bold">import</span> { Component, Vue, Mixins } from <span style="color:#d14">&#39;vue-property-decorator&#39;</span>
+<span style="color:#000;font-weight:bold">import</span> ProjectMixin from <span style="color:#d14">&#39;@/mixins/ProjectMixin&#39;</span>
+<span style="color:#a61717;background-color:#e3d2d2">@</span>Component
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> Project <span style="color:#000;font-weight:bold">extends</span> Mixins(ProjectMixin) {
+  get projectDetail()<span style="color:#000;font-weight:bold">:</span> string {
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">this</span>.projName <span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#39; &#39;</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#39;Preetish HS&#39;</span>
+  }
+}
+&lt;/<span style="color:#000080">script</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="vuex">Vuex</h3>
+<p>Vuex是大多数Vue.js应用程序中使用的官方状态管理库。最好将<code>store</code>分为 namespaced modules，即带命名空间的模块。我们将演示如何在TypeScript中编写Vuex。</p>
+<ul>
+<li>首先，我们要安装两个流行的第三方库：
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install vuex-module-decorators -D
+npm install vuex-class -D
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>在 <code>store</code>文件夹下，创建一个<code>module</code>文件夹用来放置不同的模块文件。比如创建一个拥有用户状态的文件<code>user.ts</code>：
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#998;font-style:italic">// store/modules/user.ts
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">import</span> { VuexModule, Module, Mutation, Action } from <span style="color:#d14">&#39;vuex-module-decorators&#39;</span>
+<span style="color:#000;font-weight:bold">@Module</span>({ namespaced: <span style="color:#458;font-weight:bold">true</span>, name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;test&#39;</span> })
+<span style="color:#000;font-weight:bold">class</span> User <span style="color:#000;font-weight:bold">extends</span> VuexModule {
+  <span style="color:#000;font-weight:bold">public</span> name: <span style="color:#458;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;&#39;</span>
+  <span style="color:#000;font-weight:bold">@Mutation</span>
+  <span style="color:#000;font-weight:bold">public</span> setName(newName: <span style="color:#458;font-weight:bold">string</span>)<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">void</span> {
+    <span style="color:#000;font-weight:bold">this</span>.name <span style="color:#000;font-weight:bold">=</span> newName
+  }
+  <span style="color:#000;font-weight:bold">@Action</span>
+  <span style="color:#000;font-weight:bold">public</span> updateName(newName: <span style="color:#458;font-weight:bold">string</span>)<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">void</span> {
+    <span style="color:#000;font-weight:bold">this</span>.context.commit(<span style="color:#d14">&#39;setName&#39;</span>, newName)
+  }
+}
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> User
+</code></pre></td></tr></table>
+</div>
+</div><p>在<code>vuex-module-decorators</code>库中提供了<code>Module</code>, <code>Mutation</code> 和 <code>Action</code>装饰器，对于<code>Actions</code>，在 <code>Mutations</code>和<code>context</code>中，我们不需要将状态作为我们的第一个参数，这个第三方库库会处理这些。这些方法已经自动注入了。</p>
+</li>
+<li>在store文件夹下，我们需要创建一个<code>index.ts</code> 来初始化<code>vuex</code>以及注册这个<code>module</code>：
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#000;font-weight:bold">import</span> Vue from <span style="color:#d14">&#39;vue&#39;</span>
+<span style="color:#000;font-weight:bold">import</span> Vuex from <span style="color:#d14">&#39;vuex&#39;</span>
+<span style="color:#000;font-weight:bold">import</span> User from <span style="color:#d14">&#39;@/store/modules/user&#39;</span>
+Vue.use(Vuex)
+<span style="color:#000;font-weight:bold">const</span> store <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Vuex.Store({
+  <span style="color:#000;font-weight:bold">module</span>s<span style="color:#000;font-weight:bold">:</span> {
+    User
+  }
+})
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> store
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>在组件中使用 Vuex
+要使用Vuex，我们可以利用第三方库<code>vuex-class</code>。该库提供装饰器使得在我们的Vue组件中绑定 <code>State</code>，<code>Getter</code>，<code>Mutation</code>和<code>Action</code>。
+由于我们正在使用命名空间的Vuex模块，因此我们首先从<code>vuex-class</code> 引入 <code>namespace</code>，然后传递模块名称以访问该模块。
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#000080">template</span>&gt;
+  &lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;details&#34;</span>&gt;
+    &lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;username&#34;</span>&gt;User<span style="color:#000;font-weight:bold">:</span> {{ nameUpperCase }}&lt;/<span style="color:#000080">div</span>&gt;
+    &lt;<span style="color:#000080">input</span> <span style="color:#000080">:value</span><span style="color:#d14">=&#34;name&#34;</span> <span style="color:#000080">@keydown</span><span style="color:#d14">=&#34;updateName($event.target.value)&#34;</span> /&gt;
+  &lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#000080">template</span>&gt;
+&lt;<span style="color:#000080">script</span> <span style="color:#008080">lang</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;ts&#34;</span>&gt;
+<span style="color:#000;font-weight:bold">import</span> { Component, Vue } from <span style="color:#d14">&#39;vue-property-decorator&#39;</span>
+<span style="color:#000;font-weight:bold">import</span> { namespace } from <span style="color:#d14">&#39;vuex-class&#39;</span>
+<span style="color:#000;font-weight:bold">const</span> user <span style="color:#000;font-weight:bold">=</span> namespace(<span style="color:#d14">&#39;user&#39;</span>)
+<span style="color:#a61717;background-color:#e3d2d2">@</span>Component
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> User <span style="color:#000;font-weight:bold">extends</span> Vue {
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>user.State
+  <span style="color:#000;font-weight:bold">public</span> name<span style="color:#000;font-weight:bold">!:</span> string
+
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>user.Getter
+  <span style="color:#000;font-weight:bold">public</span> nameUpperCase<span style="color:#000;font-weight:bold">!:</span> string
+
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>user.Action
+  <span style="color:#000;font-weight:bold">public</span> updateName<span style="color:#000;font-weight:bold">!:</span> (newName<span style="color:#000;font-weight:bold">:</span> string) =&gt; <span style="color:#000;font-weight:bold">void</span>
+}
+&lt;/<span style="color:#000080">script</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="axios-封装">Axios 封装</h3>
+<p>在Vue的项目中，我们使用 axios 来发送 AJAX 请求，我在项目里写了 axios 的<a href="https://github.com/dreamqyq/cnode-community/blob/master/src/utils/request.ts">统一拦截器</a>，这里的拦截器写法和 JS 没有任何区别，但是在使用该拦截器发送请求的方法会有一些不同之处，具体代码可以参考项目中的<a href="https://github.com/dreamqyq/cnode-community/blob/master/src/api/index.ts">api请求代码</a> 。下面我贴一段代码简单介绍一下：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">function</span> getTopicLists(
+  params?: <span style="color:#458;font-weight:bold">TopicListParams</span>
+)<span style="color:#000;font-weight:bold">:</span> Promise<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#0086b3">Array</span><span style="color:#000;font-weight:bold">&lt;</span>TopicListEntity<span style="color:#000;font-weight:bold">&gt;&gt;</span> {
+  <span style="color:#000;font-weight:bold">return</span> request.get(<span style="color:#d14">&#34;topics&#34;</span>, {
+    params
+  });
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>使用TypeScript，最重要的就是类型，所以在上述代码中，传进来的参数规定类型为<code>TopicListParams</code> ，而函数返回的参数是<code>Promise&lt;Array&lt;TopicListEntity&gt;&gt;</code>，这样我们在调用<code>getTopicLists</code>的时候，就可以写成这样：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#998;font-style:italic">// 使用await
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> response <span style="color:#000;font-weight:bold">=</span> await getTopicLists(); <span style="color:#998;font-style:italic">// response 即返回的Array&lt;TopicListEntity&gt;
+</span><span style="color:#998;font-style:italic">// 或使用promise.then
+</span><span style="color:#998;font-style:italic"></span>await getTopicLists({
+    limit: <span style="color:#458;font-weight:bold">40</span>,
+    page
+  }).then(response <span style="color:#000;font-weight:bold">=&gt;</span> {
+    <span style="color:#998;font-style:italic">// response 即返回的Array&lt;TopicListEntity&gt;
+</span><span style="color:#998;font-style:italic"></span>  })
+});
+</code></pre></td></tr></table>
+</div>
+</div><p>另外：一般来说后端传给前端的响应体，我们应该添加一个<code>interface</code>类型来接收，就上面代码中的<code>TopicListEntity</code>，如果后端传过来的响应数据很多，手写<code>interface</code>就很麻烦，所以给大家推荐一个工具，可以根据 json 自动生成 TypeScript 实体类型：<a href="http://www.jsontots.com/">json to ts</a>。</p>
+<hr>
+<h2 id="在vue中写tsx有哪些需要注意的地方">在Vue中写TSX有哪些需要注意的地方</h2>
+<h3 id="v-html">v-html</h3>
+<p>使用<code>domPropsInnerHTML</code>来替代<code>v-html</code></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">main</span>
+    <span style="color:#008080">domPropsInnerHTML</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">{this.topicDetail.content}</span>
+    <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;markdown-body&#34;</span>
+&gt;
+    loading💤💤
+&lt;/<span style="color:#000080">main</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="v-if">v-if</h3>
+<p>使用三元操作符来替代<code>v-if</code></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"> {<span style="color:#000;font-weight:bold">this</span>.preFlag <span style="color:#000;font-weight:bold">?</span> &lt;<span style="color:#000080">button</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;pageBtn&#34;</span>&gt;......&lt;/<span style="color:#000080">button</span>&gt; <span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;&#34;</span>}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="v-for">v-for</h3>
+<p>使用<code>map</code>遍历替代<code>v-for</code></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">{<span style="color:#000;font-weight:bold">this</span>.pageBtnList.map(page =&gt; {
+  <span style="color:#000;font-weight:bold">return</span> (
+    &lt;<span style="color:#000080">button</span>
+      <span style="color:#008080">onClick</span><span style="color:#000;font-weight:bold">=</span>{<span style="color:#000;font-weight:bold">this</span>.changePageHandler.bind(<span style="color:#000;font-weight:bold">this</span>, page)}
+      <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span>{[{ currentPage<span style="color:#000;font-weight:bold">:</span> page <span style="color:#000;font-weight:bold">===</span> <span style="color:#000;font-weight:bold">this</span>.currentPage }, <span style="color:#d14">&#34;pageBtn&#34;</span>]}
+    &gt;
+      {page}
+    &lt;/<span style="color:#000080">button</span>&gt;
+  );
+})}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="render">render</h3>
+<p><strong>注意</strong>：在render函数中的组件名一定用<strong>kebab-case命名</strong></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#000;font-weight:bold">protected</span> render() {
+  <span style="color:#000;font-weight:bold">return</span> (
+    &lt;<span style="color:#000080">footer</span>&gt;
+      &lt;<span style="color:#000080">hello</span><span style="color:#a61717;background-color:#e3d2d2">-</span><span style="color:#008080">word</span> /&gt;
+      &lt;<span style="color:#000080">p</span>&gt;
+        <span style="color:#000;font-weight:bold">&amp;</span>copy; <span style="color:#099">2020</span> Designed By Enoch Qin
+        &lt;<span style="color:#000080">a</span> <span style="color:#008080">href</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;https://github.com/dreamqyq/cnode-community&#34;</span> <span style="color:#008080">target</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;_blank&#34;</span>&gt;
+          源码链接 GitHub <span style="color:#000;font-weight:bold">&gt;&gt;</span>
+        &lt;/<span style="color:#000080">a</span>&gt;
+      &lt;/<span style="color:#000080">p</span>&gt;
+    &lt;/<span style="color:#000080">footer</span>&gt;   
+  );
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="onclick事件传值tsx">onClick事件传值（TSX）</h3>
+<p>使用<code>template</code>的时候，如果用<code>v-on</code>绑定事件，想要传参的话，可以直接这么写：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#000080">button</span> <span style="color:#000080">@click</span><span style="color:#d14">=&#34;clickHandle(params)&#34;</span>&gt;<span style="color:#008080">click</span> <span style="color:#008080">me</span>&lt;/<span style="color:#000080">button</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>但是在TSX中，如果直接这么写，就相当于立即执行了clickHandle函数：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">render(){
+  <span style="color:#998;font-style:italic">// 这样写是不行的！！
+</span><span style="color:#998;font-style:italic"></span>  <span style="color:#000;font-weight:bold">return</span> &lt;<span style="color:#000080">button</span> <span style="color:#008080">onClick</span><span style="color:#000;font-weight:bold">=</span>{<span style="color:#000;font-weight:bold">this</span>.clickHandler(params)}&gt;click me&lt;/<span style="color:#000080">button</span>&gt;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>因此，我们不得不使用<code>bind()</code>来绑定参数的形式传参：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">render(){
+  <span style="color:#000;font-weight:bold">return</span> &lt;<span style="color:#000080">button</span> <span style="color:#008080">onClick</span><span style="color:#000;font-weight:bold">=</span>{<span style="color:#000;font-weight:bold">this</span>.clickHandler.bind(<span style="color:#000;font-weight:bold">this</span>, params)}&gt;click me&lt;/<span style="color:#000080">button</span>&gt;
+}
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="开发过程中遇到的问题及解决">开发过程中遇到的问题及解决</h2>
+<h3 id="router-history模式">Router history模式</h3>
+<p>原CNode社区的url是没有#的history模式，但是这需要后端支持，所以本项目中使用了hash模式。</p>
+<ul>
+<li>Vue Router 默认模式是hash模式，页面url长这样： localhost:9090/#/payIn
+如果改成history模式，url就变成了（没有了#） localhost:9090/payIn</li>
+<li>vue-router 默认 hash 模式 —— 使用 URL 的 hash 来模拟一个完整的 URL，于是当 URL 改变时，页面不会重新加载。
+如果不想要很丑的 hash，我们可以用路由的 history 模式，这种模式充分利用 history.pushState API 来完成 URL 跳转而无须重新加载页面。
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">const</span> router <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> VueRouter({
+  mode<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;history&#39;</span>,
+  routes<span style="color:#000;font-weight:bold">:</span> [...]
+})
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>当你使用 history 模式时，URL 就像正常的 url，例如 <a href="http://yoursite.com/user/id">http://yoursite.com/user/id</a>，也好看！
+不过这种模式要玩好，还需要后台配置支持。因为我们的应用是个单页客户端应用，如果后台没有正确的配置，当用户在浏览器直接访问 <a href="http://oursite.com/user/id">http://oursite.com/user/id</a> 就会返回 404，这就不好看了。
+所以呢，你要在服务端增加一个覆盖所有情况的候选资源：如果 URL 匹配不到任何静态资源，则应该返回同一个 index.html 页面，这个页面就是你 app 依赖的页面。</li>
+</ul>
+<h3 id="publicpath-部署应用包时的基本url">publicPath 部署应用包时的基本URL</h3>
+<ul>
+<li>默认情况下【 / 】，Vue CLI 会假设你的应用是被部署在一个域名的根路径上，例如 <a href="https://www.my-app.com/">https://www.my-app.com/</a>。</li>
+<li>如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 <a href="https://www.my-app.com/my-app/">https://www.my-app.com/my-app/</a>，则设置 publicPath 为 【/my-app/】。</li>
+<li>这个值也可以被设置为空字符串【 (‘')】 或是相对路径【 ('./‘)】，这样所有的资源都会被链接为相对路径，这样打出来的包可以被部署在任意路径，也可以用在类似 Cordova hybrid 应用的文件系统中。</li>
+</ul>
+<h3 id="base-标签"><!-- raw HTML omitted --> 标签</h3>
+<p>在项目最开始开发的时候，出现了子页面无法刷新（刷新就会报错：<code>Uncaught SyntaxError: Unexpected token '&lt;‘</code>），并且子页面用到的图片资源找不到的问题。通过stack overflow的这个<a href="https://stackoverflow.com/questions/51210795/vue-cli-uncaught-syntaxerror-unexpected-token">问题的答案</a>，使用<code>&lt;base&gt;</code>标签成功解决了这个问题。
+<code>&lt;base&gt;</code>标签是用来指定一个HTML页中所有的相对路径的根路径，在<code>/public/index.html</code>中添加标签<code>&lt;base href=&quot;./&quot; /&gt;</code>，设置 href为相对路径，在本地调试和打包上线的时候，资源就都不会出问题啦。</p>
+<h3 id="axios-withcredentials">Axios withCredentials</h3>
+<p>在本项目中，后端调用的是 cnode 提供的<a href="https://cnodejs.org/api">后端接口</a>，所有接口的都设置了<code>Access-Control-Allow-Origin: *</code>，用来放置跨域。但是如果我们将axios 的 withCredentials（<strong>表示跨域请求时是否需要使用凭证</strong>）设置成true，会包CORS跨域错误：
+原因是：<code>Access-Control-Allow-Origin</code>不可以为 <code>*</code>，因为 <code>*</code> 会和 <code>Access-Control-Allow-Credentials:true</code> 产生冲突，需配置指定的地址。
+因此在项目中，<code>withCredentials</code>设置成<code>false</code>即可。</p>
+<h3 id="github-markdown-css">Github-markdown-css</h3>
+<p>在项目中使用到了<code>github-markdown-css</code>这个库用于展示markdown的样式。用法如下：</p>
+<ul>
+<li>在<code>main.ts</code>引入 <code>import &quot;github-markdown-css&quot;</code></li>
+<li>在<code>App.vue</code>中添加如下样式：
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">markdown-body</span> {
+  <span style="color:#000;font-weight:bold">box-sizing</span>: <span style="color:#000;font-weight:bold">border-box</span>;
+  <span style="color:#000;font-weight:bold">min-width</span>: <span style="color:#099">200</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">max-width</span>: <span style="color:#099">1400</span><span style="color:#458;font-weight:bold">px</span>;
+  <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">0</span> <span style="color:#000;font-weight:bold">auto</span>;
+  <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">45</span><span style="color:#458;font-weight:bold">px</span>;
+}
+  
+@<span style="color:#000;font-weight:bold">media</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000080">max-width</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000080">767px</span><span style="color:#000;font-weight:bold">)</span> {
+  .<span style="color:#458;font-weight:bold">markdown-body</span> {
+    <span style="color:#000;font-weight:bold">padding</span>: <span style="color:#099">15</span><span style="color:#458;font-weight:bold">px</span>;
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>在包含markdown内容的父标签添加class：<code>markdown-body</code></li>
+</ul>
+<h2 id="总结">总结</h2>
+<blockquote>
+<p>Now you have all the basic information you need to create a Vue.js application completely in TypeScript using a few official and third-party libraries to fully leverage the typing and custom decorator features. Vue 3.0 will have better support for TypeScript out of the box, and the whole Vue.js code was rewritten in TypeScript to improve maintainability.
+Using TypeScript might seem a bit overwhelming at first, but when you get used to it, you’ll have far fewer bugs in your code and smooth code collaboration between other developers who work on the same code base. （摘自<a href="https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/">How to write a Vue.js app completely in TypeScript</a>）</p>
+</blockquote>
+<p>翻译：现在，您知道了在创建Vue.js + TypeScript应用程序的过程中，如何使用几个官方库和第三方库所需的所有基本信息，以充分利用<strong>类型</strong>和<strong>自定义装饰器</strong>。已经发布了公测版本的Vue 3.0开箱即用将更好地支持TypeScript，并且整个Vue.js的项目代码都使用TypeScript进行了重写，以提高可维护性。
+刚开始使用TypeScript似乎有点让人不知所措，但是当您习惯了它之后，您的代码中的错误将大大减少，并且，在同一个项目中可以和其他开发者更好的协同工作。</p>
+<hr>
+<blockquote>
+<p>本文参考资料：
+👉<a href="https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/">https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/</a>
+👉<a href="https://zhuanlan.zhihu.com/p/99343202">https://zhuanlan.zhihu.com/p/99343202</a>
+👉<a href="https://cn.vuejs.org/v2/guide/typescript.html">TypeScript 支持 — Vue.js</a>
+👉<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html">TypeScript 官网</a>
+👉<a href="https://segmentfault.com/a/1190000016837020">https://segmentfault.com/a/1190000016837020</a></p>
+</blockquote>
+<p>（完）</p>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://dreamqyq.github.io/">Enoch Qin</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/">https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/Front-end-frame/from-mvc-to-mvvmvue/">从MVC到MVVM（初识Vue）</a></li>
+        
+        <li><a href="/post/Java/collection-in-java-and-their-data-structure/">Collection体系的常用类及其背后的数据结构</a></li>
+        
+        <li><a href="/post/Java/java-package-manage-and-maven/">Java的包管理与Maven</a></li>
+        
+        <li><a href="/post/Linux/use-hugo-build-self-blog/">使用Hugo搭建个人博客网站</a></li>
+        
+        <li><a href="/about/">关于我</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='https://dreamqyq.github.io/tags/Vue'>Vue</a></li>
+                
+                <li><a href='https://dreamqyq.github.io/tags/TypeScript'>TypeScript</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "dreamqyq/dreamqyq.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://dreamqyq.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://dreamqyq.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/CNode-community-with-Vue-and-TS/" title="使用Vue &#43; TypeScript &#43; TSX 实现CNode社区">使用Vue &#43; TypeScript &#43; TSX 实现CNode社区</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/collection-in-java-and-their-data-structure/" title="Collection体系的常用类及其背后的数据结构">Collection体系的常用类及其背后的数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Java/java-package-manage-and-maven/" title="Java的包管理与Maven">Java的包管理与Maven</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Linux/use-hugo-build-self-blog/" title="使用Hugo搭建个人博客网站">使用Hugo搭建个人博客网站</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/first-blog/" title="First Blog">First Blog</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/debounce-and-throttle-in-javascript/" title="JavaScript中的函数防抖动与节流">JavaScript中的函数防抖动与节流</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/HTTP/web-performance-optimization-steps/" title="Web性能优化详解">Web性能优化详解</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/JavaScript/inheritance-in-javascript/" title="JavaScript中的继承">JavaScript中的继承</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Algorithm/common-sorting-algorithms-javascript/" title="常见的排序算法（JavaScript实现）">常见的排序算法（JavaScript实现）</a>
+    </li>
+    
+    <li>
+        <a href="https://dreamqyq.github.io/post/Front-end-frame/from-mvc-to-mvvmvue/" title="从MVC到MVVM（初识Vue）">从MVC到MVVM（初识Vue）</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li><a href="https://dreamqyq.github.io/categories/Algorithm/">Algorithm (1)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/CSS/">CSS (8)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/HTTP/">HTTP (6)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Java/">Java (2)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/JavaScript/">JavaScript (11)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/Linux/">Linux (4)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">前端基础 (3)</a></li>
+    
+    <li><a href="https://dreamqyq.github.io/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架 (3)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://dreamqyq.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://dreamqyq.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Deepin/">Deepin</a>
+    
+    <a href="https://dreamqyq.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Java/">Java</a>
+    
+    <a href="https://dreamqyq.github.io/tags/JavaScript/">JavaScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Maven/">Maven</a>
+    
+    <a href="https://dreamqyq.github.io/tags/TypeScript/">TypeScript</a>
+    
+    <a href="https://dreamqyq.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://dreamqyq.github.io/tags/git/">git</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+    
+    <a href="https://dreamqyq.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/">命令行</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://www.jianshu.com/u/150c4ef48860" title="个人简书博客">Enoch 的简书主页</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://dreamqyq.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div class="container">
+        &copy; 2020 <a href="https://dreamqyq.github.io/">Enoch&#39;s Blog By Enoch Qin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/flysnow-org/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-163504763-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+</body>
+
+</html>
